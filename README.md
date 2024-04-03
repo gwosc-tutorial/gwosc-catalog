@@ -66,3 +66,36 @@ This repo is to develop and test a script that checks that the json schema for u
     ]
 }
 ```
+
+## Notes
+
+- Event description is optional (can be null)
+- Catalog description is mandatory
+- PE set type is either "search" or "pe"
+- data-url is a link to the posterior samples file
+- links section can be entirely ommited
+
+Acceptable values for PE name keys are:
+
+* `chirp_mass_source`: The chirp mass of the binary as measured in the source frame.
+* `chirp_mass`: The chirp mass of the binary in detector frame.
+* `mass_1_source`: The source mass of the heavier compact object in the merger, as measured in the source frame.
+* `mass_2_source`: The source mass of the lighter compact object in the merger, as measured in the source frame.
+* `total_mass_source`: The total mass of the binary as measured in the source frame.
+* `final_mass_source`: The mass of the remnant compact object after merger, assuming a binary black hole model, and measured in the source frame.
+* `chi_eff`: Spin parameter indicating the effective inspiral spin.
+* `luminosity_distance`: The luminosity distance to the source.
+* `redshift`: The calculated redshift.
+* `network_matched_filter_snr`: The network Signal to Noise Ratio of the Matched Filtering.
+* `far`: The False Alarm Rate of the detection in events per year.
+* `p_astro`: The probability of astronomical origin, assuming a compact binary.
+
+All masses MUST be in units of solar masses.
+
+The `luminosity_distance` key MUST be in units of Mpc.
+
+***
+
+A list for all PE names used by ligo is listed here:
+
+https://lscsoft.docs.ligo.org/pesummary/stable/gw/parameters.html
