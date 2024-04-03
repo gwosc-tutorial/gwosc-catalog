@@ -71,13 +71,13 @@ def verify_upload_schema(newcat):
             logger.warning("Empty list of PE sets.")
             continue
         for peset in pe_sets:
-            mandatory_keys = ["name", "type", "waveform-family", "data-url", "pes"]
+            mandatory_keys = ["name", "type", "waveform-family", "data-url", "parameters"]
             optional_keys = ["links"]
             for akey in mandatory_keys:
                 if akey not in peset.keys():
                     logger.warning(f"PE Set missing mandatory key `{akey}`.")
 
-            if "pes" not in peset.keys():
+            if "parameters" not in peset.keys():
                 continue
 
             # Check for other unsupported keys
@@ -86,12 +86,12 @@ def verify_upload_schema(newcat):
                 logger.warning(f"Warning - Unrecognized keys: {other_keys}")
 
             # Parse PE
-            pes = peset["pes"]
-            if len(pes) == 0:
+            params = peset["parameters"]
+            if len(params) == 0:
                 logger.warning("Empty list of parameters.")
                 continue
 
-            for pe in pes:
+            for pe in params:
                 mandatory_keys = [
                     "name",
                     "best",

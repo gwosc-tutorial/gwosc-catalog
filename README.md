@@ -24,7 +24,7 @@ This repo is to develop and test a script that checks that the json schema for u
                     "type": "pe",
                     "waveform-family": "IMRPhenomPv3HM",
                     "data-url": "https://zenodo.org/api/records/5546663/files/IGWN-GWTC3p0-v1-GW200322_091133_PEDataRelease_mixed_cosmo.h5/content",
-                    "pes": [
+                    "parameters": [
                         {
                             "name": "mass_1_source",
                             "best": 3.34,
@@ -43,7 +43,7 @@ This repo is to develop and test a script that checks that the json schema for u
                             "lower_limit": false,
                             "sigfigs": 1,
                         },
-                        ... more PE's
+                        ... more parameter estimations
                     ],
                     "links": [
                         {
