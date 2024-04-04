@@ -67,6 +67,45 @@ This repo is to develop and test a script that checks that the json schema for u
 }
 ```
 
+## Key Description
+
+1. Root level
+
+    - `name`: (string) The name of the catalog.
+    - `description`: (string) A description of the catalog.
+    - `doi`: (string, url) The full URL to the publication DOI related to this catalog.
+
+2. Events level
+
+    - `name`: (string) The name of the event using the convention `GWyymmdd_hhmmss`.
+    - `gps`: (float) The GPS time of the detection.
+    - `description`: (string | null) A short description of this event.
+    - `detectors`: (list(string))
+
+3. PE sets level
+
+    - `name`: (string)
+    - `type`: (string)
+    - `waveform-family`: (string)
+    - `data-url`: (string, url) The full URL to the posterior sample tarball online.
+
+4. Parameters level
+
+    - `name`: (string) One of the qualifyed names 
+    - `best`: (float)
+    - `upper`: (float)
+    - `lower`: (float)
+    - `upper_limit`: (bool)
+    - `lower_limit`: (bool)
+    - `sigfigs`: (int)
+    - `links`: (dictionary) This section is completely optional and can be ommited.
+
+5. Links level (optional)
+
+    - `url`: (string, url)
+    - `content-type`: (string)
+    - `description`: (string)
+
 ## Notes
 
 - Event description is optional (can be null)
