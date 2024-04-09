@@ -82,40 +82,35 @@ This repo is to develop and test a script that checks that the json schema for u
     - `gps`: (float) The GPS time of the detection.
     - `description`: (string | null) A short description of this event.
     - `detectors`: (list(string))
+    - `strain_channel`: (string | null) The strain channel name used for the analysis.
 
 3. PE sets level
 
-    - `name`: (string)
-    - `type`: (string)
-    - `waveform-family`: (string)
+    - `name`: (string) The pipeline used to generate the parameter estimations.
+    - `type`: (string) Allowed values: ["pe", "search"]
+    - `waveform-family`: (string) The name of the waveform family used in the estimation.
     - `data-url`: (string, url) The full URL to the posterior sample tarball online.
 
 4. Parameters level
 
-    - `name`: (string) One of the qualifyed names 
-    - `best`: (float)
-    - `upper`: (float)
-    - `lower`: (float)
-    - `upper_limit`: (bool)
-    - `lower_limit`: (bool)
-    - `sigfigs`: (int)
-    - `links`: (dictionary) This section is completely optional and can be ommited.
+    - `name`: (string) Name of the parameter being estimated. See allowed values below.
+    - `best`: (float) Best value of the parameter. Median value of the posterior distribution.
+    - `upper`: (float) Upper bound of the 90% confidence region.
+    - `lower`: (float) Lower bound of the 90% confidence region.
+    - `upper_limit`: (bool) Whether this best value is an upper limit bound.
+    - `lower_limit`: (bool) Whether this best value is an lower limit bound.
+    - `sigfigs`: (int) Number of significant figures of the best value.
+    - `links`: (object | null) Links to external resources. This section can be ommited.
 
 5. Links level (optional)
 
-    - `url`: (string, url)
-    - `content-type`: (string)
-    - `description`: (string)
+    - `url`: (string, url) URL to external resources like skymaps or posterior samples.
+    - `content-type`: (string) Allowed values: ["posterior-samples", "skymap"].
+    - `description`: (string) A brief description of the resource.
 
 ## Notes
 
-- Event description is optional (can be null)
-- Catalog description is mandatory
-- PE set type is either "search" or "pe"
-- data-url is a link to the posterior samples file
-- links section can be entirely ommited
-
-Acceptable values for PE name keys are:
+Allowed values for PE `name` keys are:
 
 * `chirp_mass_source`: The chirp mass of the binary as measured in the source frame.
 * `chirp_mass`: The chirp mass of the binary in detector frame.
@@ -130,6 +125,8 @@ Acceptable values for PE name keys are:
 * `far`: The False Alarm Rate of the detection in events per year.
 * `p_astro`: The probability of astronomical origin, assuming a compact binary.
 
+Other values for `name` are permitted but will generate a warning message.
+
 All masses MUST be in units of solar masses.
 
 The `luminosity_distance` key MUST be in units of Mpc.
@@ -139,3 +136,7 @@ The `luminosity_distance` key MUST be in units of Mpc.
 A list for all PE names used by ligo is listed here:
 
 https://lscsoft.docs.ligo.org/pesummary/stable/gw/parameters.html
+
+A list of waveform family names can be found here: (incorrect, update)
+
+https://lscsoft.docs.ligo.org/lalsuite/
