@@ -139,8 +139,16 @@ def verify_upload_schema(newcat):
 
 
 def main():
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        prog="ccverify",
+        description="Check if the upload json schema for GWOSC community catalogs is correct.",
+    )
+    parser.add_argument("filename", help="Json file to check")
+    args = parser.parse_args()
     _set_logger()
-    with open("test_cat.json") as fp:
+    with open(args.filename) as fp:
         newcat = json.load(fp)
     verify_upload_schema(newcat)
 
