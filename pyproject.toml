@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ccverify"
+authors = [{ name = "GWOSC", email = "gwosc@igwn.org" }]
+description = "Upload Schema Checker for GWOSC Community Catalogs"
+maintainers = [{ name = "GWOSC Dev Team", email = "gwosc@igwn.org" }]
+readme = "README.md"
+dynamic = ["version"]
+requires-python = ">=3.9"
+keywords = [
+    "astronomy",
+    "gravitational-waves",
+    "catalog",
+]
+
+[project.urls]
+homepage = "https://astroalign.quatrope.org"
+documentation = "https://astroalign.readthedocs.io/"
+repository = "https://github.com/quatrope/astroalign"
+
+[tool.setuptools]
+py-modules = ["astroalign"]
+
+[project.scripts]
+ccverify = "ccverify.core:main"
+
+[tool.setuptools.dynamic]
+version = {attr = "ccverify.__version__"}

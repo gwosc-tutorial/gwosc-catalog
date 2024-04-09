@@ -71,7 +71,13 @@ def verify_upload_schema(newcat):
             logger.warning("Empty list of PE sets.")
             continue
         for peset in pe_sets:
-            mandatory_keys = ["name", "type", "waveform-family", "data-url", "parameters"]
+            mandatory_keys = [
+                "name",
+                "type",
+                "waveform-family",
+                "data-url",
+                "parameters",
+            ]
             optional_keys = ["links"]
             for akey in mandatory_keys:
                 if akey not in peset.keys():
@@ -132,8 +138,12 @@ def verify_upload_schema(newcat):
     return True
 
 
-if __name__ == "__main__":
+def main():
     _set_logger()
     with open("test_cat.json") as fp:
         newcat = json.load(fp)
     verify_upload_schema(newcat)
+
+
+if __name__ == "__main__":
+    main()
