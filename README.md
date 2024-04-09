@@ -23,7 +23,7 @@ This repo is to develop and test a script that checks that the json schema for u
                     "name": "ogc-pipeline",
                     "type": "pe",
                     "waveform-family": "IMRPhenomPv3HM",
-                    "data-url": "https://zenodo.org/api/records/5546663/files/IGWN-GWTC3p0-v1-GW200322_091133_PEDataRelease_mixed_cosmo.h5/content",
+                    "data-url": "https://zenodo.org/api/records/...",
                     "parameters": [
                         {
                             "name": "mass_1_source",
@@ -32,7 +32,7 @@ This repo is to develop and test a script that checks that the json schema for u
                             "lower": 1,
                             "upper_limit": false,
                             "lower_limit": false,
-                            "sigfigs": 2,
+                            "sigfigs": 2
                         },
                         {
                             "name": "mass_2_source",
@@ -41,9 +41,9 @@ This repo is to develop and test a script that checks that the json schema for u
                             "lower": 2,
                             "upper_limit": false,
                             "lower_limit": false,
-                            "sigfigs": 1,
+                            "sigfigs": 1
                         },
-                        ... more parameter estimations
+                        // ... more parameter estimations
                     ],
                     "links": [
                         {
@@ -56,13 +56,13 @@ This repo is to develop and test a script that checks that the json schema for u
                             "content-type": "skymap",
                             "description": "Tarball with skymap files"
                         },
-                        ... more links
+                        // ... more links
                     ]
                 },
-                ... more PE sets
+                // ... more PE sets
             ]
         },
-        ... more events
+        // ... more events
     ]
 }
 ```
