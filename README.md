@@ -2,6 +2,20 @@
 
 This repo is to develop and test a script that checks that the json schema for uploading community catalogs is correct.
 
+## Installation
+
+1. Clone repo
+
+    `git clone https://git.ligo.org/gwosc/schemator.git`
+
+2. Install
+
+    `cd schemator; pip install .`
+
+3. Check upload schema
+
+    `ccverify path/to/mycatalog.json`
+
 ## Example
 
 ```json
