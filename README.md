@@ -33,16 +33,18 @@ This repo is to develop and test a script that checks that the json schema for u
                             "lower": 1,
                             "upper_limit": false,
                             "lower_limit": false,
-                            "sigfigs": 2
+                            "sigfigs": 2,
+                            "unit": "M_sun"
                         },
                         {
-                            "name": "mass_2_source",
-                            "best": 13.4,
+                            "name": "luminosity_distance",
+                            "best": 130.4,
                             "upper": 5,
                             "lower": 2,
                             "upper_limit": false,
                             "lower_limit": false,
-                            "sigfigs": 1
+                            "sigfigs": 4,
+                            "unit": "Mpc"
                         },
                         // ... more parameter estimations
                     ],
@@ -100,6 +102,7 @@ This repo is to develop and test a script that checks that the json schema for u
     - `upper_limit`: (bool) Whether this best value is an upper limit bound.
     - `lower_limit`: (bool) Whether this best value is an lower limit bound.
     - `sigfigs`: (int) Number of significant figures of the best value.
+    - `unit`: The unit the `best` value was measured in. See below for allowed values.
     - `links`: (object | null) Links to external resources. This section can be ommited.
 
 5. Links level (optional)
@@ -127,9 +130,11 @@ Allowed values for PE `name` keys are:
 
 Other values for `name` are permitted but will generate a warning message.
 
-All masses MUST be in units of solar masses.
+### Units
 
-The `luminosity_distance` key MUST be in units of Mpc.
+All masses MUST be in units of solar masses. Acceptable values for solar mass abbreviation are the ones accepted by [astropy units](https://docs.astropy.org/en/stable/units/ref_api.html#module-astropy.units.astrophys) module: [`solMass`, `M_sun`, `Msun`].
+
+The `luminosity_distance` `unit` key MUST have the value `Mpc`.
 
 ***
 

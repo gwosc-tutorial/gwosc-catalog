@@ -23,16 +23,18 @@
                   "lower": 1,
                   "upper_limit": false,
                   "lower_limit": false,
-                  "sigfigs": 2
+                  "sigfigs": 2,
+                  "unit": "M_sun"
                 },
                 {
-                  "name": "mass_2_source",
-                  "best": 13.4,
+                  "name": "luminosity_distance",
+                  "best": 130.4,
                   "upper": 5,
                   "lower": 2,
                   "upper_limit": false,
                   "lower_limit": false,
-                  "sigfigs": 1
+                  "sigfigs": 4,
+                  "unit": "Mpc"
                 }
               ],
               "links": [
