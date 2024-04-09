@@ -4,53 +4,51 @@
     "doi": "https://doi.org/12345/",
     "events": [
         {
-            "name": "GWYYMMDD_HHMMSS",
-            "gps": 1234567890.1,
-            "description": "string or null",
-            "detectors": [
-                "H1",
-                "L1"
-            ],
-            "pe_sets": [
+          "name": "GWYYMMDD_HHMMSS",
+          "gps": 1234567890.1,
+          "description": "string or null",
+          "detectors": ["H1", "L1"],
+          "strain_channel": "string",
+          "pe_sets": [
+            {
+              "name": "string",
+              "type": "pe or search",
+              "waveform-family": "IMRPhenomPv3HM",
+              "data-url": "https://zenodo.org/",
+              "parameters": [
                 {
-                    "name": "string",
-                    "type": "pe or search",
-                    "waveform-family": "IMRPhenomPv3HM",
-                    "data-url": "https://zenodo.org/",
-                    "parameters": [
-                        {
-                            "name": "mass_1_source",
-                            "best": 3.34,
-                            "upper": 1,
-                            "lower": 1,
-                            "upper_limit": false,
-                            "lower_limit": false,
-                            "sigfigs": 2
-                        },
-                        {
-                            "name": "mass_2_source",
-                            "best": 13.4,
-                            "upper": 5,
-                            "lower": 2,
-                            "upper_limit": false,
-                            "lower_limit": false,
-                            "sigfigs": 1
-                        }
-                    ],
-                    "links": [
-                        {
-                            "url": "https://example.com",
-                            "content-type": "posterior-samples",
-                            "description": "string"
-                        },
-                        {
-                            "url": "https://example.com",
-                            "content-type": "skymap",
-                            "description": "string"
-                        }
-                    ]
+                  "name": "mass_1_source",
+                  "best": 3.34,
+                  "upper": 1,
+                  "lower": 1,
+                  "upper_limit": false,
+                  "lower_limit": false,
+                  "sigfigs": 2
+                },
+                {
+                  "name": "mass_2_source",
+                  "best": 13.4,
+                  "upper": 5,
+                  "lower": 2,
+                  "upper_limit": false,
+                  "lower_limit": false,
+                  "sigfigs": 1
                 }
-            ]
+              ],
+              "links": [
+                {
+                  "url": "https://example.com",
+                  "content-type": "posterior-samples",
+                  "description": "string"
+                },
+                {
+                  "url": "https://example.com",
+                  "content-type": "skymap",
+                  "description": "string"
+                }
+              ]
+            }
+          ]
         }
     ]
 }
