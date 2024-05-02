@@ -36,14 +36,20 @@ An example of the schema can be found in the `schema.json` file on this repo.
     - `detectors`: (list(string))
     - `strain_channel`: (string | null) The strain channel name used for the analysis.
 
-3. PE sets level
+3. Search level
+
+    - `pipeline_name`: (string) The name of the search pipeline.
+    - `pastro`: The probability of astronomical origin, assuming a compact binary.
+    - `far`: The False Alarm Rate in unites of events per year.
+
+4. PE sets level
 
     - `name`: (string) The pipeline used to generate the parameter estimations.
     - `type`: (string) Allowed values: ["pe", "search"]
     - `waveform-family`: (string) The name of the waveform family used in the estimation.
     - `data-url`: (string, url) The full URL to the posterior sample tarball online.
 
-4. Parameters level
+5. Parameters level
 
     - `name`: (string) Name of the parameter being estimated. See allowed values below.
     - `best`: (float) Best value of the parameter. Median value of the posterior distribution.
@@ -55,7 +61,7 @@ An example of the schema can be found in the `schema.json` file on this repo.
     - `unit`: The unit the `best` value was measured in. See below for allowed values.
     - `links`: (object | null) Links to external resources. This section can be ommited.
 
-5. Links level (optional)
+6. Links level (optional)
 
     - `url`: (string, url) URL to external resources like skymaps or posterior samples.
     - `content-type`: (string) Allowed values: ["posterior-samples", "skymap"].
@@ -75,8 +81,6 @@ Allowed values for PE `name` keys are:
 * `luminosity_distance`: The luminosity distance to the source.
 * `redshift`: The calculated redshift.
 * `network_matched_filter_snr`: The network Signal to Noise Ratio of the Matched Filtering.
-* `far`: The False Alarm Rate of the detection in events per year.
-* `p_astro`: The probability of astronomical origin, assuming a compact binary.
 
 Other values for `name` are permitted but will generate a warning message.
 

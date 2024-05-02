@@ -9,10 +9,16 @@
           "description": "string or null",
           "detectors": ["H1", "L1"],
           "strain_channel": "string",
-          "pe_sets": [
+          "search": [
+            {
+              "pipeline_name": "string",
+              "pastro": 1,
+              "far": 123
+            }
+          ],
+          "pe_sets":
             {
               "name": "string",
-              "type": "pe or search",
               "waveform-family": "IMRPhenomPv3HM",
               "data-url": "https://zenodo.org/",
               "parameters": [
@@ -50,7 +56,6 @@
                 }
               ]
             }
-          ]
         }
     ]
 }
