@@ -105,6 +105,7 @@ def verify_upload_schema(newcat):
                     "upper_limit",
                     "lower_limit",
                     "sigfigs",
+                    "unit",
                 ]
                 for akey in mandatory_keys:
                     if akey not in pe.keys():
