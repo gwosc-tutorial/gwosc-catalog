@@ -1,4 +1,4 @@
-# Schemator
+# `gwosc-catalog`
 
 This repo is to develop and test a script that checks that the json schema for uploading community catalogs is correct.
 
@@ -6,11 +6,11 @@ This repo is to develop and test a script that checks that the json schema for u
 
 1. Clone repo
 
-    `git clone https://git.ligo.org/gwosc/schemator.git`
+    `git clone git@github.com:gwosc-tutorial/gwosc-catalog.git`
 
 2. Install
 
-    `cd schemator; pip install .`
+    `cd gwosc-catalog; pip install .`
 
 3. Check upload schema
 
