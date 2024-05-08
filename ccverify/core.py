@@ -38,7 +38,7 @@ def verify_upload_schema(newcat):
     for event in events:
         mandatory_keys = ["name", "gps", "description", "detectors", "pe_sets"]
         for akey in mandatory_keys:
-            if "{akey}" not in event.keys():
+            if akey not in event.keys():
                 logger.warning(f"Event missing mandatory key `{akey}`.")
 
         if "name" in event.keys() and not bool(
