@@ -13,8 +13,8 @@
             {
               "name": "string",
               "type": "pe or search",
-              "waveform-family": "IMRPhenomPv3HM",
-              "data-url": "https://zenodo.org/",
+              "waveform_family": "IMRPhenomPv3HM",
+              "data_url": "https://zenodo.org/",
               "parameters": [
                 {
                   "name": "mass_1_source",
@@ -40,12 +40,12 @@
               "links": [
                 {
                   "url": "https://example.com",
-                  "content-type": "posterior-samples",
+                  "content_type": "posterior_samples",
                   "description": "string"
                 },
                 {
                   "url": "https://example.com",
-                  "content-type": "skymap",
+                  "content_type": "skymap",
                   "description": "string"
                 }
               ]
