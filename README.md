@@ -45,7 +45,6 @@ An example of the schema can be found in the `schema.json` file on this repo.
 4. PE sets level
 
     - `name`: (string) The pipeline used to generate the parameter estimations.
-    - `type`: (string) Allowed values: ["pe", "search"]
     - `waveform-family`: (string) The name of the waveform family used in the estimation.
     - `data-url`: (string, url) The full URL to the posterior sample tarball online.
 
