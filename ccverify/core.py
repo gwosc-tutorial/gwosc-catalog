@@ -74,8 +74,8 @@ def verify_upload_schema(newcat):
             mandatory_keys = [
                 "name",
                 "type",
-                "waveform-family",
-                "data-url",
+                "waveform_family",
+                "data_url",
                 "parameters",
             ]
             optional_keys = ["links"]
