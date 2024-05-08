@@ -36,7 +36,7 @@ def verify_upload_schema(newcat):
         logger.warning("No events found on `events` key.")
         return False
     for event in events:
-        mandatory_keys = ["name", "gps", "description", "detectors", "pe_sets"]
+        mandatory_keys = ["name", "gps", "description", "detectors", "pe_sets", "search"]
         for akey in mandatory_keys:
             if "{akey}" not in event.keys():
                 logger.warning(f"Event missing mandatory key `{akey}`.")
@@ -73,7 +73,6 @@ def verify_upload_schema(newcat):
         for peset in pe_sets:
             mandatory_keys = [
                 "name",
-                "type",
                 "waveform_family",
                 "data_url",
                 "parameters",
@@ -106,6 +105,7 @@ def verify_upload_schema(newcat):
                     "upper_limit",
                     "lower_limit",
                     "sigfigs",
+                    "unit",
                 ]
                 for akey in mandatory_keys:
                     if akey not in pe.keys():
