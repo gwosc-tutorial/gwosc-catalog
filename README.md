@@ -45,8 +45,8 @@ An example of the schema can be found in the `schema.json` file on this repo.
 4. PE sets level
 
     - `name`: (string) The pipeline used to generate the parameter estimations.
-    - `waveform-family`: (string) The name of the waveform family used in the estimation.
-    - `data-url`: (string, url) The full URL to the posterior sample tarball online.
+    - `waveform_family`: (string) The name of the waveform family used in the estimation.
+    - `data_url`: (string, url) The full URL to the posterior sample tarball online.
 
 5. Parameters level
 
@@ -63,7 +63,7 @@ An example of the schema can be found in the `schema.json` file on this repo.
 6. Links level (optional)
 
     - `url`: (string, url) URL to external resources like skymaps or posterior samples.
-    - `content-type`: (string) Allowed values: ["posterior-samples", "skymap"].
+    - `content_type`: (string) Allowed values: ["posterior_samples", "skymap"].
     - `description`: (string) A brief description of the resource.
 
 ## Notes

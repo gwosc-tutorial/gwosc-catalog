@@ -46,12 +46,12 @@
               "links": [
                 {
                   "url": "https://example.com",
-                  "content-type": "posterior-samples",
+                  "content_type": "posterior_samples",
                   "description": "string"
                 },
                 {
                   "url": "https://example.com",
-                  "content-type": "skymap",
+                  "content_type": "skymap",
                   "description": "string"
                 }
               ]
