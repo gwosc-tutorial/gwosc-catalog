@@ -73,7 +73,6 @@ def verify_upload_schema(newcat):
         for peset in pe_sets:
             mandatory_keys = [
                 "name",
-                "type",
                 "waveform-family",
                 "data-url",
                 "parameters",
