@@ -1,12 +1,12 @@
 {
-    "name": "string",
-    "description": "string",
+    "catalog_name": "string",
+    "catalog_description": "string",
     "doi": "https://doi.org/12345/",
     "events": [
         {
-          "name": "GWYYMMDD_HHMMSS",
+          "event_name": "GWYYMMDD_HHMMSS",
           "gps": 1234567890.1,
-          "description": "string or null",
+          "event_description": "string or null",
           "detectors": ["H1", "L1"],
           "strain_channel": "string",
           "search": [
@@ -18,25 +18,25 @@
           ],
           "pe_sets":
             {
-              "name": "string",
-              "waveform-family": "IMRPhenomPv3HM",
-              "data-url": "https://zenodo.org/",
+              "pe_set_name": "string",
+              "waveform_family": "IMRPhenomPv3HM",
+              "data_url": "https://zenodo.org/",
               "parameters": [
                 {
-                  "name": "mass_1_source",
-                  "best": 3.34,
-                  "upper": 1,
-                  "lower": 1,
+                  "parameter_name": "mass_1_source",
+                  "median": 3.34,
+                  "upper_95": 1,
+                  "lower_05": 1,
                   "upper_limit": false,
                   "lower_limit": false,
                   "sigfigs": 2,
                   "unit": "M_sun"
                 },
                 {
-                  "name": "luminosity_distance",
-                  "best": 130.4,
-                  "upper": 5,
-                  "lower": 2,
+                  "parameter_name": "luminosity_distance",
+                  "median": 130.4,
+                  "upper_95": 5,
+                  "lower_05": 2,
                   "upper_limit": false,
                   "lower_limit": false,
                   "sigfigs": 4,

@@ -23,7 +23,7 @@ class ParameterValue:
 
     Fields
     ------
-    name: str
+    parameter_name: str
         Parameter name.
 
     median: float
@@ -42,21 +42,22 @@ class ParameterValue:
 
     unit: str or None
     """
-    name: str
-    best: float
-    upper: float
-    lower: float
+    parameter_name: str
+    median: float
+    upper_95: float
+    lower_05: float
     upper_limit: bool = False
     lower_limit: bool = False
     sigfigs: int = None
     unit: str = None
 
     @classmethod
-    def from_series(cls, name: str, series: pd.Series):
+    def from_series(cls, parameter_name: str, series: pd.Series):
         q05, median, q95 = series.quantile((0.05, 0.5, 0.95))
         error = median - q05, q95 - median
         kwargs = _condition_value_and_error(median, error)
-        return cls(name=name, unit=UNITS.get(name), **kwargs)
+        return cls(parameter_name=parameter_name,
+                   unit=UNITS.get(parameter_name), **kwargs)
 
 
 @dataclasses.dataclass
@@ -69,7 +70,7 @@ class Link:
 @dataclasses.dataclass
 class SearchResult:
     """Summary of the significance obtained by a search pipeline."""
-    pipeline: str
+    pipeline_name: str
     pastro: float
     far: float  # (1/yr)
 
@@ -77,7 +78,7 @@ class SearchResult:
 @dataclasses.dataclass
 class ParameterSet:
     """Summary of a single parameter-estimation run."""
-    name: str
+    pe_set_name: str
     data_url: str
     waveform_family: str
     parameters: list[ParameterValue]
@@ -86,7 +87,7 @@ class ParameterSet:
     @classmethod
     def from_samples(cls,
                      samples: pd.DataFrame,
-                     name,
+                     pe_set_name,
                      data_url,
                      waveform_family,
                      links=None):
@@ -95,7 +96,7 @@ class ParameterSet:
         """
         parameters = [ParameterValue.from_series(*item)
                       for item in samples.items()]
-        return cls(name=name,
+        return cls(pe_set_name=pe_set_name,
                    data_url=data_url,
                    waveform_family=waveform_family,
                    parameters=parameters,
@@ -106,12 +107,12 @@ class ParameterSet:
 @dataclasses.dataclass
 class Event:
     """Parameter estimation runs for a single event."""
-    name: str
+    event_name: str
     gps: float
     detectors: list[str]
     search: list[SearchResult]
     pe_sets: list[ParameterSet]
-    description: str = None
+    event_description: str = None
 
 
 @dataclasses.dataclass
@@ -120,17 +121,18 @@ class Catalog:
 
     Fields
     ------
-    name: str
-        The name of the catalog.
-    description: str
+    catalog_name: str
+        The catalog_name of the catalog.
+
+    catalog_description: str
         A description of the catalog.
+
     doi: str
         The full URL to the publication DOI related to this catalog.
-    events: list of ``Event`` instances
-        
+    events: list of ``Event`` instances 
     """
-    name: str
-    description: str
+    catalog_name: str
+    catalog_description: str
     doi: str
     events: list[Event]
 
@@ -154,9 +156,9 @@ def _condition_value_and_error(value, error) -> dict:
     min_error = np.min(error)
 
     if min_error == 0:
-        return {'best': float(f'{value:.2g}'),
-                'lower': float(f'{-error[0]:.2g}'),
-                'upper': float(f'{error[1]:.2g}'),
+        return {'median': float(f'{value:.2g}'),
+                'lower_05': float(f'{-error[0]:.2g}'),
+                'upper_95': float(f'{error[1]:.2g}'),
                 'sigfigs': None}
 
     last_decimal = _first_decimal_place(min_error)
@@ -174,9 +176,9 @@ def _condition_value_and_error(value, error) -> dict:
     truncated_value = truncate(value)
     err_minus = truncate(value - error[0] - truncated_value)
     err_plus = truncate(value + error[1] - truncated_value)
-    return {'best': truncated_value,
-            'lower': err_minus,
-            'upper': err_plus,
+    return {'median': truncated_value,
+            'lower_05': err_minus,
+            'upper_95': err_plus,
             'sigfigs': last_decimal - first_decimal + 1}
 
 
