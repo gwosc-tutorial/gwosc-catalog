@@ -19,8 +19,8 @@
           "pe_sets":
             {
               "name": "string",
-              "waveform-family": "IMRPhenomPv3HM",
-              "data-url": "https://zenodo.org/",
+              "waveform_family": "IMRPhenomPv3HM",
+              "data_url": "https://zenodo.org/",
               "parameters": [
                 {
                   "name": "mass_1_source",
