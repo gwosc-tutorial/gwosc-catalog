@@ -18,7 +18,7 @@ def _set_logger():
 def verify_upload_schema(newcat):
     logger = logging.getLogger(__name__)
 
-    mandatory_keys = ["catalog_name", "catalog_description", "doi", "events"]
+    mandatory_keys = ["catalog_name", "release_date", "catalog_description", "doi", "events"]
     for akey in mandatory_keys:
         if akey not in newcat.keys():
             logger.warning(f"Mandatory key `{akey}` not found.")
