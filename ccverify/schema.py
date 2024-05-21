@@ -44,8 +44,8 @@ class ParameterValue:
     """
     parameter_name: str
     median: float
-    upper_95: float
-    lower_05: float
+    upper_95: float = None
+    lower_05: float = None
     upper_limit: bool = False
     lower_limit: bool = False
     sigfigs: int = None
@@ -69,10 +69,20 @@ class Link:
 
 @dataclasses.dataclass
 class SearchResult:
-    """Summary of the significance obtained by a search pipeline."""
+    """
+    Summary of the significance of an event obtained by a search
+    pipeline.
+
+    Fields
+    ------
     pipeline_name: str
-    pastro: float
-    far: float  # (1/yr)
+        Name of the search pipeline.
+
+    search_statistics: list of ``ParameterValue``
+        Contains entries reporting `pastro`, `far`, `network_snr`, etc.
+    """
+    pipeline_name: str
+    search_statistics: list[ParameterValue]
 
 
 @dataclasses.dataclass
