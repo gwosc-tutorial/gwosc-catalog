@@ -132,16 +132,21 @@ class Catalog:
     Fields
     ------
     catalog_name: str
-        The catalog_name of the catalog.
+        The name of the catalog.
+
+    release_date: str
+        Release date of the catalog in YYYY-MM-DD format.
 
     catalog_description: str
         A description of the catalog.
 
     doi: str
         The full URL to the publication DOI related to this catalog.
-    events: list of ``Event`` instances 
+
+    events: list of ``Event``
     """
     catalog_name: str
+    release_date: str
     catalog_description: str
     doi: str
     events: list[Event]
