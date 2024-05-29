@@ -24,15 +24,15 @@ An example of the schema can be found in the `schema.json` file on this repo.
 
 1. Root level
 
-    - `name`: (string) The name of the catalog.
-    - `description`: (string) A description of the catalog.
+    - `catalog_name`: (string) The name of the catalog.
+    - `catalog_description`: (string) A description of the catalog.
     - `doi`: (string, url) The full URL to the publication DOI related to this catalog.
 
 2. Events level
 
-    - `name`: (string) The name of the event using the convention `GWyymmdd_hhmmss`.
+    - `event_name`: (string) The name of the event using the convention `GWyymmdd_hhmmss`.
     - `gps`: (float) The GPS time of the detection.
-    - `description`: (string | null) A short description of this event.
+    - `event_description`: (string | null) A short description of this event.
     - `detectors`: (list(string))
     - `strain_channel`: (string | null) The strain channel name used for the analysis.
 
@@ -44,20 +44,20 @@ An example of the schema can be found in the `schema.json` file on this repo.
 
 4. PE sets level
 
-    - `name`: (string) The pipeline used to generate the parameter estimations.
+    - `pe_set_name`: (string) The pipeline used to generate the parameter estimations.
     - `waveform_family`: (string) The name of the waveform family used in the estimation.
     - `data_url`: (string, url) The full URL to the posterior sample tarball online.
 
 5. Parameters level
 
-    - `name`: (string) Name of the parameter being estimated. See allowed values below.
-    - `best`: (float) Best value of the parameter. Median value of the posterior distribution.
-    - `upper`: (float) Upper bound of the 90% confidence region.
-    - `lower`: (float) Lower bound of the 90% confidence region.
-    - `upper_limit`: (bool) Whether this best value is an upper limit bound.
-    - `lower_limit`: (bool) Whether this best value is an lower limit bound.
+    - `parameter_name`: (string) Name of the parameter being estimated. See allowed values below.
+    - `median`: (float) Median value of the posterior distribution.
+    - `upper_95`: (float) Upper bound of the 95% confidence region.
+    - `lower_05`: (float) Lower bound of the 95% confidence region.
+    - `is_upper_bound`: (bool) Whether this best value is an upper limit bound. This can be ommited.
+    - `is_lower_bound`: (bool) Whether this best value is an lower limit bound. This can be ommited.
     - `sigfigs`: (int) Number of significant figures of the best value.
-    - `unit`: The unit the `best` value was measured in. See below for allowed values.
+    - `unit`: The physical unit of the `median` value. See below for allowed values.
     - `links`: (object | null) Links to external resources. This section can be ommited.
 
 6. Links level (optional)
