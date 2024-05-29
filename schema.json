@@ -27,8 +27,8 @@
                   "median": 3.34,
                   "upper_95": 1,
                   "lower_05": 1,
-                  "upper_limit": false,
-                  "lower_limit": false,
+                  "is_upper_bound": false,
+                  "is_lower_bound": false,
                   "sigfigs": 2,
                   "unit": "M_sun"
                 },
@@ -37,8 +37,8 @@
                   "median": 130.4,
                   "upper_95": 5,
                   "lower_05": 2,
-                  "upper_limit": false,
-                  "lower_limit": false,
+                  "is_upper_bound": false,
+                  "is_lower_bound": false,
                   "sigfigs": 4,
                   "unit": "Mpc"
                 }
