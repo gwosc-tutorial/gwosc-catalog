@@ -1,4 +1,5 @@
 {
+    "schema_version": "1.0",
     "catalog_name": "string",
     "catalog_description": "string",
     "doi": "https://doi.org/12345/",
