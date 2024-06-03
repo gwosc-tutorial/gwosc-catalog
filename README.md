@@ -40,8 +40,6 @@ An example of the schema can be found in the `schema.json` file on this repo.
 3. Search level
 
     - `pipeline_name`: (string) The name of the search pipeline.
-    - `pastro`: The probability of astronomical origin, assuming a compact binary.
-    - `far`: The False Alarm Rate in unites of events per year.
 
 4. PE sets level
 
@@ -55,8 +53,8 @@ An example of the schema can be found in the `schema.json` file on this repo.
     - `median`: (float) Median value of the posterior distribution.
     - `upper_95`: (float) Upper bound of the 95% confidence region.
     - `lower_05`: (float) Lower bound of the 95% confidence region.
-    - `is_upper_bound`: (bool) Whether this best value is an upper limit bound. This can be ommited.
-    - `is_lower_bound`: (bool) Whether this best value is an lower limit bound. This can be ommited.
+    - `is_upper_bound`: (bool) Whether this best value is an upper limit bound. Defaults to `false` if ommited.
+    - `is_lower_bound`: (bool) Whether this best value is an lower limit bound. Defaults to `false` if ommited.
     - `sigfigs`: (int) Number of significant figures of the best value.
     - `unit`: The physical unit of the `median` value. See below for allowed values.
     - `links`: (object | null) Links to external resources. This section can be ommited.
@@ -69,7 +67,7 @@ An example of the schema can be found in the `schema.json` file on this repo.
 
 ## Notes
 
-Allowed values for PE `name` keys are:
+Allowed values for PE `parameter_name` keys are:
 
 * `chirp_mass_source`: The chirp mass of the binary as measured in the source frame.
 * `chirp_mass`: The chirp mass of the binary in detector frame.
@@ -80,7 +78,12 @@ Allowed values for PE `name` keys are:
 * `chi_eff`: Spin parameter indicating the effective inspiral spin.
 * `luminosity_distance`: The luminosity distance to the source.
 * `redshift`: The calculated redshift.
-* `network_matched_filter_snr`: The network Signal to Noise Ratio of the Matched Filtering.
+
+Allowed values for search `parameter_name` keys are:
+
+* `snr`: The network Signal to Noise Ratio of the Matched Filtering.
+* `pastro`: The probability of astronomical origin, assuming a compact binary.
+* `far`: The False Alarm Rate of the detection in events per year.
 
 Other values for `name` are permitted but will generate a warning message.
 
@@ -89,6 +92,8 @@ Other values for `name` are permitted but will generate a warning message.
 All masses MUST be in units of solar masses. Acceptable values for solar mass abbreviation are the ones accepted by [astropy units](https://docs.astropy.org/en/stable/units/ref_api.html#module-astropy.units.astrophys) module: [`solMass`, `M_sun`, `Msun`].
 
 The `luminosity_distance` `unit` key MUST have the value `Mpc`.
+
+The `far` `unit` key MUST have the value `1/year`.
 
 ***
 

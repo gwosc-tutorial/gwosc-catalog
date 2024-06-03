@@ -9,12 +9,16 @@ import pandas as pd
 from . import __version__
 
 
-UNITS = dict.fromkeys(('chirp_mass_source',
-                       'chirp_mass',
-                       'mass_1_source',
-                       'mass_2_source',
-                       'total_mass_source'),
-                      'Msun') | {'luminosity_distance': 'Mpc'}
+UNITS = dict.fromkeys(
+    (
+        "chirp_mass_source",
+        "chirp_mass",
+        "mass_1_source",
+        "mass_2_source",
+        "total_mass_source",
+    ),
+    "Msun",
+) | {"luminosity_distance": "Mpc", "far": "1/year"}
 
 
 @dataclasses.dataclass
@@ -36,7 +40,7 @@ class ParameterValue:
     lower_05: float
         5th percentile minus median.
 
-    upper_limit, lower_limit: bool
+    is_upper_bound, is_lower_bound: bool
 
     sigfigs: int
         Number of significant figures.
@@ -47,8 +51,8 @@ class ParameterValue:
     median: float
     upper_95: float = None
     lower_05: float = None
-    upper_limit: bool = False
-    lower_limit: bool = False
+    is_upper_bound: bool = False
+    is_lower_bound: bool = False
     sigfigs: int = None
     unit: str = None
 
