@@ -24,6 +24,7 @@ An example of the schema can be found in the `schema.json` file on this repo.
 
 1. Root level
 
+    - `schema_version`: (string) The version of the schema used. Useful for backwards compatibility.
     - `catalog_name`: (string) The name of the catalog.
     - `catalog_description`: (string) A description of the catalog.
     - `doi`: (string, url) The full URL to the publication DOI related to this catalog.

@@ -6,6 +6,7 @@ import dataclasses
 import json
 import numpy as np
 import pandas as pd
+from . import __version__
 
 
 UNITS = dict.fromkeys(('chirp_mass_source',
@@ -131,6 +132,9 @@ class Catalog:
 
     Fields
     ------
+    version: str
+        The schema version.
+
     catalog_name: str
         The name of the catalog.
 
@@ -145,6 +149,7 @@ class Catalog:
 
     events: list of ``Event``
     """
+    version: str = __version__
     catalog_name: str
     release_date: str
     catalog_description: str
