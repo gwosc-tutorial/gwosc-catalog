@@ -9,13 +9,31 @@
           "event_description": "string or null",
           "detectors": ["H1", "L1"],
           "strain_channel": "string",
-          "search": [
-            {
-              "pipeline_name": "string",
-              "pastro": 1,
-              "far": 123
-            }
-          ],
+          "search": {
+            "pipeline_name": "string",
+            "parameters": [
+              {
+                "parameter_name": "far",
+                "median": 0.00001,
+                "is_upper_bound": true,
+                "sigfigs": 5,
+                "unit": "1/year"
+              },
+              {
+                "parameter_name": "pastro",
+                "median": 0.99,
+                "is_lower_bound": true,
+                "sigfigs": 2
+              },
+              {
+                "parameter_name": "snr",
+                "median": 3.34,
+                "upper_95": 1,
+                "lower_05": 1,
+                "sigfigs": 2
+              }
+            ]
+          },
           "pe_sets":
             {
               "pe_set_name": "string",
