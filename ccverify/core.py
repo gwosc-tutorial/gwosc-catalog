@@ -116,8 +116,8 @@ def verify_upload_schema(newcat):
                     "median",
                     "upper_95",
                     "lower_05",
-                    "upper_limit",
-                    "lower_limit",
+                    "is_upper_bound",
+                    "is_lower_bound",
                     "sigfigs",
                     "unit",
                 ]
