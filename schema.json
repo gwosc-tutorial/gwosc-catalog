@@ -17,7 +17,7 @@
                 "parameter_name": "far",
                 "median": 0.00001,
                 "is_upper_bound": true,
-                "sigfigs": 5,
+                "sigfigs": 1,
                 "unit": "1/year"
               },
               {
@@ -28,10 +28,10 @@
               },
               {
                 "parameter_name": "snr",
-                "median": 3.34,
-                "upper_95": 1,
-                "lower_05": 1,
-                "sigfigs": 2
+                "median": 9.34,
+                "upper_95": 0.01,
+                "lower_05": 0.01,
+                "sigfigs": 3
               }
             ]
           },
@@ -44,21 +44,21 @@
                 {
                   "parameter_name": "mass_1_source",
                   "median": 3.34,
-                  "upper_95": 1,
-                  "lower_05": 1,
+                  "upper_95": 0.01,
+                  "lower_05": 0.01,
                   "is_upper_bound": false,
                   "is_lower_bound": false,
-                  "sigfigs": 2,
+                  "sigfigs": 3,
                   "unit": "M_sun"
                 },
                 {
                   "parameter_name": "luminosity_distance",
-                  "median": 130.4,
-                  "upper_95": 5,
-                  "lower_05": 2,
+                  "median": 130.0,
+                  "upper_95": 5.0,
+                  "lower_05": 2.0,
                   "is_upper_bound": false,
                   "is_lower_bound": false,
-                  "sigfigs": 4,
+                  "sigfigs": 3,
                   "unit": "Mpc"
                 }
               ],
