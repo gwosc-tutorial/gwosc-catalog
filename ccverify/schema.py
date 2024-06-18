@@ -149,12 +149,12 @@ class Catalog:
 
     events: list of ``Event``
     """
-    version: str = __version__
     catalog_name: str
     release_date: str
     catalog_description: str
     doi: str
     events: list[Event]
+    schema_version: str = __version__
 
     def to_json(self, filename):
         """Write catalog to JSON file."""
