@@ -53,11 +53,11 @@ An example of the schema can be found in the `schema.json` file on this repo.
     - `median`: (float) Median value of the posterior distribution.
     - `upper_95`: (float) Upper bound of the 95% confidence region.
     - `lower_05`: (float) Lower bound of the 95% confidence region.
-    - `is_upper_bound`: (bool) Whether this best value is an upper limit bound. Defaults to `false` if ommited.
-    - `is_lower_bound`: (bool) Whether this best value is an lower limit bound. Defaults to `false` if ommited.
+    - `is_upper_bound`: (bool) Whether this best value is an upper limit bound. Defaults to `false` if omitted.
+    - `is_lower_bound`: (bool) Whether this best value is an lower limit bound. Defaults to `false` if omitted.
     - `sigfigs`: (int) Number of significant figures of the best value.
     - `unit`: The physical unit of the `median` value. See below for allowed values.
-    - `links`: (object | null) Links to external resources. This section can be ommited.
+    - `links`: (object | null) Links to external resources. This section can be omitted.
 
 6. Links level (optional)
 
