@@ -17,21 +17,21 @@
                 "parameter_name": "far",
                 "median": 0.00001,
                 "is_upper_bound": true,
-                "sigfigs": 1,
+                "decimal_places": 5,
                 "unit": "1/year"
               },
               {
                 "parameter_name": "pastro",
                 "median": 0.99,
                 "is_lower_bound": true,
-                "sigfigs": 2
+                "decimal_places": 2
               },
               {
                 "parameter_name": "snr",
                 "median": 9.34,
                 "upper_95": 0.01,
                 "lower_05": 0.01,
-                "sigfigs": 3
+                "decimal_places": 2
               }
             ]
           },
@@ -48,7 +48,7 @@
                   "lower_05": 0.01,
                   "is_upper_bound": false,
                   "is_lower_bound": false,
-                  "sigfigs": 3,
+                  "decimal_places": 2,
                   "unit": "M_sun"
                 },
                 {
@@ -58,7 +58,7 @@
                   "lower_05": 2.0,
                   "is_upper_bound": false,
                   "is_lower_bound": false,
-                  "sigfigs": 3,
+                  "decimal_places": 0,
                   "unit": "Mpc"
                 }
               ],

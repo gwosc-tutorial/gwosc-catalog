@@ -118,7 +118,7 @@ def verify_upload_schema(newcat):
                     "lower_05",
                     "is_upper_bound",
                     "is_lower_bound",
-                    "sigfigs",
+                    "decimal_places",
                     "unit",
                 ]
                 for akey in mandatory_keys:
