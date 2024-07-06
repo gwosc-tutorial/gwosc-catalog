@@ -15,6 +15,10 @@ keywords = [
     "gravitational-waves",
     "catalog",
 ]
+dependencies = [
+  "numpy",
+  "pandas",
+]
 
 [project.urls]
 homepage = "https://astroalign.quatrope.org"
