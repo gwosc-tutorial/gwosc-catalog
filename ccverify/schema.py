@@ -48,12 +48,12 @@ class ParameterValue:
     unit: str or None
     """
     parameter_name: str
+    decimal_places: int
     median: float
     upper_95: float = None
     lower_05: float = None
     is_upper_bound: bool = False
     is_lower_bound: bool = False
-    decimal_places: int = None
     unit: str = None
 
     @classmethod
