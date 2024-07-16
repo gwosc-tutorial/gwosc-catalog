@@ -55,7 +55,7 @@ An example of the schema can be found in the `schema.json` file on this repo.
     - `lower_05`: (float) Lower bound of the 95% confidence region.
     - `is_upper_bound`: (bool) Whether this best value is an upper limit bound. Defaults to `false` if omitted.
     - `is_lower_bound`: (bool) Whether this best value is an lower limit bound. Defaults to `false` if omitted.
-    - `sigfigs`: (int) Number of significant figures of the best value.
+    - `decimal_places`: (int) Number of decimal places of the best value to display, must be >= 0.
     - `unit`: The physical unit of the `median` value. See below for allowed values.
     - `links`: (object | null) Links to external resources. This section can be omitted.
 

@@ -42,18 +42,18 @@ class ParameterValue:
 
     is_upper_bound, is_lower_bound: bool
 
-    sigfigs: int
-        Number of significant figures.
+    decimal_places: int
+        Number of places after the decimal point to display.
 
     unit: str or None
     """
     parameter_name: str
+    decimal_places: int
     median: float
     upper_95: float = None
     lower_05: float = None
     is_upper_bound: bool = False
     is_lower_bound: bool = False
-    sigfigs: int = None
     unit: str = None
 
     @classmethod
@@ -183,17 +183,15 @@ def _condition_value_and_error(value, error) -> dict:
         return {'median': float(f'{value:.2g}'),
                 'lower_05': float(f'{-error[0]:.2g}'),
                 'upper_95': float(f'{error[1]:.2g}'),
-                'sigfigs': None}
+                'decimal_places': max(0, _first_decimal_place(value) + 1)}
 
-    last_decimal = _first_decimal_place(min_error)
+    decimal_places = _first_decimal_place(min_error)
     if f'{min_error:e}'.startswith('1'):
-        last_decimal += 1
-
-    first_decimal = _first_decimal_place(value)
+        decimal_places += 1
 
     def truncate(val):
-        rounded = round(val, last_decimal)
-        if last_decimal > 0:
+        rounded = round(val, decimal_places)
+        if decimal_places > 0:
             return rounded
         return int(rounded)
 
@@ -203,7 +201,7 @@ def _condition_value_and_error(value, error) -> dict:
     return {'median': truncated_value,
             'lower_05': err_minus,
             'upper_95': err_plus,
-            'sigfigs': last_decimal - first_decimal + 1}
+            'decimal_places': max(0, decimal_places)}
 
 
 def _first_decimal_place(value) -> int:
