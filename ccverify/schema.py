@@ -127,7 +127,7 @@ class Event:
     detectors: list[str]
     search: list[SearchResult]
     pe_sets: list[ParameterSet]
-    event_description: str = None
+    event_description: str = ""
 
 
 @dataclasses.dataclass
