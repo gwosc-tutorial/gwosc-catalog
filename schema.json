@@ -35,7 +35,7 @@
               }
             ]
           },
-          "pe_sets":
+          "pe_sets": [
             {
               "pe_set_name": "string",
               "waveform_family": "IMRPhenomPv3HM",
@@ -75,6 +75,7 @@
                 }
               ]
             }
+          ]
         }
     ]
 }
