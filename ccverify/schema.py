@@ -96,6 +96,7 @@ class ParameterSet:
     pe_set_name: str
     data_url: str
     waveform_family: str
+    is_preferred: bool
     parameters: list[ParameterValue]
     links: list[Link] = None
 
@@ -105,6 +106,7 @@ class ParameterSet:
                      pe_set_name,
                      data_url,
                      waveform_family,
+                     is_preferred,
                      links=None):
         """
         Constructor from a ``pandas.DataFrame`` of posterior samples.
@@ -114,6 +116,7 @@ class ParameterSet:
         return cls(pe_set_name=pe_set_name,
                    data_url=data_url,
                    waveform_family=waveform_family,
+                   is_preferred=is_preferred,
                    parameters=parameters,
                    links=links,
                   )
