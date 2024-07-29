@@ -35,7 +35,6 @@ An example of the schema can be found in the `schema.json` file on this repo.
     - `gps`: (float) The GPS time of the detection.
     - `event_description`: (string | null) A short description of this event.
     - `detectors`: (list(string))
-    - `strain_channel`: (string | null) The strain channel name used for the analysis.
 
 3. Search level
 
