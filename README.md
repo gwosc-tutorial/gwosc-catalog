@@ -33,8 +33,8 @@ An example of the schema can be found in the `schema.json` file on this repo.
 
     - `event_name`: (string) The name of the event using the convention `GWyymmdd_hhmmss`.
     - `gps`: (float) The GPS time of the detection.
-    - `event_description`: (string | null) A short description of this event.
-    - `detectors`: (list(string))
+    - `event_description`: (string) A short description of this event.
+    - `detectors`: (list(string)) A list of detector data used for this event.
 
 3. Search level
 
@@ -44,7 +44,7 @@ An example of the schema can be found in the `schema.json` file on this repo.
 
     - `pe_set_name`: (string) The pipeline used to generate the parameter estimations.
     - `waveform_family`: (string) The name of the waveform family used in the estimation.
-    - `data_url`: (string, url) The full URL to the posterior sample tarball online.
+    - `data_url`: (string, url) The full URL to a repository that stores posterior samples.
     - `is_preferred`: (bool) `true` if this set should be the preferred one to pick parameter values from.
 
 5. Parameters level
@@ -61,8 +61,10 @@ An example of the schema can be found in the `schema.json` file on this repo.
 
 6. Links level (optional)
 
-    - `url`: (string, url) URL to external resources like skymaps or posterior samples.
-    - `content_type`: (string) Allowed values: ["posterior_samples", "skymap"].
+    Note: For a link to posterior samples, use `data_url` under PE sets level.
+
+    - `url`: (string, url) URL to external resource.
+    - `content_type`: (string) The type of the resource: "skymap", "documentation", etc.
     - `description`: (string) A brief description of the resource.
 
 ## Notes
