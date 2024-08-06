@@ -41,7 +41,7 @@ class ParameterValue:
         5th percentile minus median.
 
     is_upper_bound, is_lower_bound: bool
-        Is this value is an upper or lower bound.
+        True if this value is an upper or lower bound, False otherwise.
 
     decimal_places: int
         Number of places after the decimal point to display.
@@ -122,7 +122,7 @@ class ParameterSet:
         Name of the parameter-estimation pipeline.
 
     data_url: str, url
-        The full URL to a repository that stores posterior samples.
+        The full URL to the file that stores posterior samples.
 
     waveform_family: str
         The name of the waveform family used for the estimation.
@@ -172,7 +172,7 @@ class Event:
     Fields
     ------
     event_name: str
-        The name of the event using the convention `GWyymmdd[_hhmmss]`.
+        The name of the event using the convention `GWyymmdd_hhmmss`.
 
     gps: float
         The GPS time of the detection.
