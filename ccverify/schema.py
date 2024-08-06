@@ -83,11 +83,11 @@ class SearchResult:
     pipeline_name: str
         Name of the search pipeline.
 
-    search_statistics: list of ``ParameterValue``
+    parameters: list of ``ParameterValue``
         Contains entries reporting `pastro`, `far`, `network_snr`, etc.
     """
     pipeline_name: str
-    search_statistics: list[ParameterValue]
+    parameters: list[ParameterValue]
 
 
 @dataclasses.dataclass

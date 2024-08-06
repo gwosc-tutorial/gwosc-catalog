@@ -9,7 +9,6 @@
           "gps": 1234567890.1,
           "event_description": "string or null",
           "detectors": ["H1", "L1"],
-          "strain_channel": "string",
           "search": {
             "pipeline_name": "string",
             "parameters": [
@@ -35,7 +34,7 @@
               }
             ]
           },
-          "pe_sets":
+          "pe_sets": [
             {
               "pe_set_name": "string",
               "waveform_family": "IMRPhenomPv3HM",
@@ -75,6 +74,7 @@
                 }
               ]
             }
+          ]
         }
     ]
 }
