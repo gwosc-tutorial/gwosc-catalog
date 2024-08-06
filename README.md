@@ -53,8 +53,8 @@ An example of the schema can be found in the `schema.json` file on this repo.
     - `median`: (float) Median value of the posterior distribution.
     - `upper_95`: (float) Upper bound of the 95% confidence region.
     - `lower_05`: (float) Lower bound of the 95% confidence region.
-    - `is_upper_bound`: (bool) `true` if this value is an upper bound, `false` otherwise. Defaults to `false` if ommited.
-    - `is_lower_bound`: (bool) `true` if this value is an upper bound, `false` otherwise. Defaults to `false` if ommited.
+    - `is_upper_bound`: (bool) `true` if this value is an upper bound, `false` otherwise. Defaults to `false` if omitted.
+    - `is_lower_bound`: (bool) `true` if this value is an upper bound, `false` otherwise. Defaults to `false` if omitted.
     - `decimal_places`: (int) Number of decimal places of the best value to display, must be >= 0.
     - `unit`: The physical unit of the `median` value. See below for allowed values.
     - `links`: (object | null) Links to external resources. This section can be omitted.
@@ -96,6 +96,8 @@ All masses MUST be in units of solar masses. Acceptable values for solar mass ab
 The `luminosity_distance` `unit` key MUST have the value `Mpc`.
 
 The `far` `unit` key MUST have the value `1/year`.
+
+For dimensionless units, the key can be omitted or set to `null`.
 
 ***
 

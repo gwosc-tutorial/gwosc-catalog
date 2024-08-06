@@ -47,7 +47,7 @@ class ParameterValue:
         Number of places after the decimal point to display.
 
     unit: str or None
-        The physical unit of the parameter.
+        The physical unit of the parameter. Set to ``None`` for dimensionless units.
     """
 
     parameter_name: str
