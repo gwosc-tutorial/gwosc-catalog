@@ -45,6 +45,7 @@ An example of the schema can be found in the `schema.json` file on this repo.
     - `pe_set_name`: (string) The pipeline used to generate the parameter estimations.
     - `waveform_family`: (string) The name of the waveform family used in the estimation.
     - `data_url`: (string, url) The full URL to the posterior sample tarball online.
+    - `is_preferred`: (bool) `true` if this set should be the preferred one to pick parameter values from.
 
 5. Parameters level
 
