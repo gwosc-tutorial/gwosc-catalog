@@ -97,7 +97,7 @@ class ParameterSet:
     data_url: str
     waveform_family: str
     parameters: list[ParameterValue]
-    is_default: bool = False
+    is_preferred: bool = False
     links: list[Link] = None
 
     @classmethod
@@ -106,7 +106,7 @@ class ParameterSet:
                      pe_set_name,
                      data_url,
                      waveform_family,
-                     is_default,
+                     is_preferred,
                      links=None):
         """
         Constructor from a ``pandas.DataFrame`` of posterior samples.
@@ -118,7 +118,7 @@ class ParameterSet:
                    waveform_family=waveform_family,
                    parameters=parameters,
                    links=links,
-                   is_default=is_default,
+                   is_preferred=is_preferred,
                   )
 
 
@@ -134,7 +134,7 @@ class Event:
 
     def __post_init__(self):
         n_defaults = np.count_nonzero(
-            [pe_set.is_default for pe_set in self.pe_sets])
+            [pe_set.is_preferred for pe_set in self.pe_sets])
         if n_defaults != 1:
             raise ValueError('Exactly one of the `pe_sets` should be set to '
                              f'default, got {n_defaults}')

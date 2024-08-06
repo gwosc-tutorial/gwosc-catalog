@@ -90,7 +90,7 @@ def verify_upload_schema(newcat):
                 "waveform_family",
                 "data_url",
                 "parameters",
-                "is_default",
+                "is_preferred",
             ]
             optional_keys = ["links"]
             for akey in mandatory_keys:
