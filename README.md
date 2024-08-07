@@ -33,8 +33,8 @@ An example of the schema can be found in the `schema.json` file on this repo.
 
     - `event_name`: (string) The name of the event using the convention `GWyymmdd_hhmmss`.
     - `gps`: (float) The GPS time of the detection.
-    - `event_description`: (string | null) A short description of this event.
-    - `detectors`: (list(string))
+    - `event_description`: (string) A short description of this event.
+    - `detectors`: (list(string)) A list of detector data used for this event.
 
 3. Search level
 
@@ -44,7 +44,7 @@ An example of the schema can be found in the `schema.json` file on this repo.
 
     - `pe_set_name`: (string) The pipeline used to generate the parameter estimations.
     - `waveform_family`: (string) The name of the waveform family used in the estimation.
-    - `data_url`: (string, url) The full URL to the posterior sample tarball online.
+    - `data_url`: (string, url) The full URL to the file that stores posterior samples.
     - `is_preferred`: (bool) `true` if this set should be the preferred one to pick parameter values from.
 
 5. Parameters level
@@ -53,16 +53,18 @@ An example of the schema can be found in the `schema.json` file on this repo.
     - `median`: (float) Median value of the posterior distribution.
     - `upper_95`: (float) Upper bound of the 95% confidence region.
     - `lower_05`: (float) Lower bound of the 95% confidence region.
-    - `is_upper_bound`: (bool) Whether this best value is an upper limit bound. Defaults to `false` if omitted.
-    - `is_lower_bound`: (bool) Whether this best value is an lower limit bound. Defaults to `false` if omitted.
+    - `is_upper_bound`: (bool) `true` if this value is an upper bound, `false` otherwise. Defaults to `false` if omitted.
+    - `is_lower_bound`: (bool) `true` if this value is an upper bound, `false` otherwise. Defaults to `false` if omitted.
     - `decimal_places`: (int) Number of decimal places of the best value to display, must be >= 0.
     - `unit`: The physical unit of the `median` value. See below for allowed values.
     - `links`: (object | null) Links to external resources. This section can be omitted.
 
 6. Links level (optional)
 
-    - `url`: (string, url) URL to external resources like skymaps or posterior samples.
-    - `content_type`: (string) Allowed values: ["posterior_samples", "skymap"].
+    Note: For a link to posterior samples, use `data_url` under PE sets level.
+
+    - `url`: (string, url) URL to external resource.
+    - `content_type`: (string) The type of the resource: "skymap", "documentation", etc.
     - `description`: (string) A brief description of the resource.
 
 ## Notes
@@ -94,6 +96,8 @@ All masses MUST be in units of solar masses. Acceptable values for solar mass ab
 The `luminosity_distance` `unit` key MUST have the value `Mpc`.
 
 The `far` `unit` key MUST have the value `1/year`.
+
+For dimensionless units, the key can be omitted or set to `null`.
 
 ***
 
