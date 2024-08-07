@@ -3,6 +3,7 @@ Dataclasses for organizing a catalog of parameter estimation results in
 a format compatible with the Gravitational Wave Open Science Center.
 """
 import dataclasses
+import logging
 import json
 import numpy as np
 import pandas as pd
@@ -111,6 +112,12 @@ class SearchResult:
     pipeline_name: str
     parameters: list[ParameterValue]
 
+    @classmethod
+    def from_json(cls, search):
+        search_parameters = search.pop("parameters")
+        parameters = [ParameterValue(**p) for p in search_parameters]
+        return SearchResult(**search, parameters=parameters)
+
 
 @dataclasses.dataclass
 class ParameterSet:
@@ -164,6 +171,12 @@ class ParameterSet:
             is_preferred=is_preferred,
         )
 
+    @classmethod
+    def from_json(cls, peset):
+        parameters = [ParameterValue(**p) for p in peset.pop("parameters")]
+        links = [Link(**u) for u in peset.pop("links", [])]
+        return ParameterSet(**peset, parameters=parameters, links=links)
+
 
 @dataclasses.dataclass
 class Event:
@@ -205,6 +218,16 @@ class Event:
                 f"default, got {n_defaults}"
             )
 
+    @classmethod
+    def from_json(cls, event):
+        searches = event.pop("search")
+        pe_sets = event.pop("pe_sets")
+        return Event(
+            **event,
+            search=[SearchResult.from_json(s) for s in searches],
+            pe_sets=[ParameterSet.from_json(pe_set) for pe_set in pe_sets],
+        )
+
 
 @dataclasses.dataclass
 class Catalog:
@@ -241,6 +264,11 @@ class Catalog:
         """Write catalog to JSON file."""
         with open(filename, "w", encoding="utf-8") as file:
             json.dump(dataclasses.asdict(self), file, indent=2)
+
+    @classmethod
+    def from_json(cls, catalog):
+        events = catalog.pop("events")
+        return Catalog(**catalog, events=[Event.from_json(event) for event in events])
 
 
 def _condition_value_and_error(value, error) -> dict:
@@ -287,3 +315,34 @@ def _condition_value_and_error(value, error) -> dict:
 
 def _first_decimal_place(value) -> int:
     return int(np.ceil(-np.log10(np.abs(value))))
+
+
+def _set_logger():
+    import sys
+
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setLevel(logging.DEBUG)
+    formatter = logging.Formatter("[%(asctime)s][%(levelname)s] %(name)s: %(message)s")
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+
+
+def main():
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        prog="validateschema",
+        description="Validate the upload json schema for a GWOSC community catalog.",
+    )
+    parser.add_argument("filename", help="Json file to check")
+    args = parser.parse_args()
+    _set_logger()
+    with open(args.filename) as fp:
+        newcat = json.load(fp)
+    Catalog.from_json(newcat)
+
+
+if __name__ == "__main__":
+    main()

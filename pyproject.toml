@@ -5,15 +5,15 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ccverify"
 authors = [{ name = "GWOSC", email = "gwosc@igwn.org" }]
-description = "Upload Schema Checker for GWOSC Community Catalogs"
-maintainers = [{ name = "GWOSC Dev Team", email = "gwosc@igwn.org" }]
+description = "Upload Schema for GWOSC Community Catalogs"
+maintainers = [{ name = "Community Catalog Dev Team", email = "gwosc@igwn.org" }]
 readme = "README.md"
 dynamic = ["version"]
 requires-python = ">=3.9"
 keywords = [
-    "astronomy",
     "gravitational-waves",
     "catalog",
+    "events",
 ]
 dependencies = [
   "numpy",
@@ -21,15 +21,15 @@ dependencies = [
 ]
 
 [project.urls]
-homepage = "https://astroalign.quatrope.org"
-documentation = "https://astroalign.readthedocs.io/"
-repository = "https://github.com/quatrope/astroalign"
+homepage = "https://github.com/gwosc-tutorial/gwosc-catalog"
+documentation = "https://github.com/gwosc-tutorial/gwosc-catalog"
+repository = "https://github.com/gwosc-tutorial/gwosc-catalog"
 
 [tool.setuptools]
 packages = ["ccverify"]
 
 [project.scripts]
-ccverify = "ccverify.core:main"
+validateschema = "ccverify.schema:main"
 
 [tool.setuptools.dynamic]
 version = {attr = "ccverify.__version__"}
