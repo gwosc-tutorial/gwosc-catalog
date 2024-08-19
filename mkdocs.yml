@@ -1,0 +1,19 @@
+site_name: GWOSC Catalogs
+nav:
+  - Home: index.md
+  - Schema: schema.md
+  - Create a file: creation.md
+  - Validate a file: validation.md
+theme:
+  name: material_igwn
+  features:
+    - content.code.copy
+    - content.code.select
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
