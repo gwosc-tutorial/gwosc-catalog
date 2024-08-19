@@ -46,7 +46,8 @@ An example of the schema can be found in the `schema.json` file on this repo.
     - `waveform_family`: (string) The name of the waveform family used in the estimation.
     - `data_url`: (string, url) The full URL to the file that stores posterior samples.
     - `is_preferred`: (bool) `true` if this set should be the preferred one to pick parameter values from.
-        Exactly one PE set should be preferred. If this key is omitted, it defaults to `false`.
+        Exactly one of the PE sets must be preferred in order for results to be properly displayed
+        in the catalog table. If this key is omitted, it defaults to `false`.
 
 5. Parameters level
 
