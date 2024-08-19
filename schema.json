@@ -1,80 +1,82 @@
 {
-    "schema_version": "1.0",
-    "catalog_name": "string",
-    "catalog_description": "string",
-    "doi": "https://doi.org/12345/",
-    "events": [
+  "schema_version": "1.0",
+  "catalog_name": "string",
+  "catalog_description": "string",
+  "doi": "https://doi.org/12345/",
+  "events": [
+    {
+      "event_name": "GWYYMMDD_HHMMSS",
+      "gps": 1234567890.1,
+      "event_description": "string or null",
+      "detectors": ["H1", "L1"],
+      "search": [
         {
-          "event_name": "GWYYMMDD_HHMMSS",
-          "gps": 1234567890.1,
-          "event_description": "string or null",
-          "detectors": ["H1", "L1"],
-          "search": {
-            "pipeline_name": "string",
-            "parameters": [
-              {
-                "parameter_name": "far",
-                "median": 0.00001,
-                "is_upper_bound": true,
-                "decimal_places": 5,
-                "unit": "1/year"
-              },
-              {
-                "parameter_name": "pastro",
-                "median": 0.99,
-                "is_lower_bound": true,
-                "decimal_places": 2
-              },
-              {
-                "parameter_name": "snr",
-                "median": 9.34,
-                "upper_95": 0.01,
-                "lower_05": 0.01,
-                "decimal_places": 2
-              }
-            ]
-          },
-          "pe_sets": [
+          "pipeline_name": "string",
+          "parameters": [
             {
-              "pe_set_name": "string",
-              "waveform_family": "IMRPhenomPv3HM",
-              "data_url": "https://zenodo.org/",
-              "parameters": [
-                {
-                  "parameter_name": "mass_1_source",
-                  "median": 3.34,
-                  "upper_95": 0.01,
-                  "lower_05": 0.01,
-                  "is_upper_bound": false,
-                  "is_lower_bound": false,
-                  "decimal_places": 2,
-                  "unit": "M_sun"
-                },
-                {
-                  "parameter_name": "luminosity_distance",
-                  "median": 130.0,
-                  "upper_95": 5.0,
-                  "lower_05": 2.0,
-                  "is_upper_bound": false,
-                  "is_lower_bound": false,
-                  "decimal_places": 0,
-                  "unit": "Mpc"
-                }
-              ],
-              "links": [
-                {
-                  "url": "https://example.com",
-                  "content_type": "posterior_samples",
-                  "description": "string"
-                },
-                {
-                  "url": "https://example.com",
-                  "content_type": "skymap",
-                  "description": "string"
-                }
-              ]
+              "parameter_name": "far",
+              "median": 0.00001,
+              "is_upper_bound": true,
+              "decimal_places": 5,
+              "unit": "1/year"
+            },
+            {
+              "parameter_name": "pastro",
+              "median": 0.99,
+              "is_lower_bound": true,
+              "decimal_places": 2
+            },
+            {
+              "parameter_name": "snr",
+              "median": 9.34,
+              "upper_95": 0.01,
+              "lower_05": 0.01,
+              "decimal_places": 2
             }
           ]
         }
-    ]
+      ],
+      "pe_sets": [
+        {
+          "pe_set_name": "string",
+          "waveform_family": "IMRPhenomPv3HM",
+          "data_url": "https://zenodo.org/",
+          "parameters": [
+            {
+              "parameter_name": "mass_1_source",
+              "median": 3.34,
+              "upper_95": 0.01,
+              "lower_05": 0.01,
+              "is_upper_bound": false,
+              "is_lower_bound": false,
+              "decimal_places": 2,
+              "unit": "M_sun"
+            },
+            {
+              "parameter_name": "luminosity_distance",
+              "median": 130,
+              "upper_95": 5,
+              "lower_05": 2,
+              "is_upper_bound": false,
+              "is_lower_bound": false,
+              "decimal_places": 0,
+              "unit": "Mpc"
+            }
+          ],
+          "links": [
+            {
+              "url": "https://example.com",
+              "content_type": "posterior_samples",
+              "description": "string"
+            },
+            {
+              "url": "https://example.com",
+              "content_type": "skymap",
+              "description": "string"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

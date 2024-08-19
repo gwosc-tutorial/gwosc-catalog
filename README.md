@@ -91,6 +91,8 @@ Allowed values for search `parameter_name` keys are:
 
 Other values for `name` are permitted but will generate a warning message.
 
+In case of being more than one search pipeline, the chosen figures to display will be the best values for the whole set.
+
 ### Units
 
 All masses MUST be in units of solar masses. Acceptable values for solar mass abbreviation are the ones accepted by [astropy units](https://docs.astropy.org/en/stable/units/ref_api.html#module-astropy.units.astrophys) module: [`solMass`, `M_sun`, `Msun`].
