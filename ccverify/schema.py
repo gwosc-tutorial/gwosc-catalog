@@ -114,8 +114,7 @@ class SearchResult:
 
     @classmethod
     def from_json(cls, search):
-        search_parameters = search.pop("parameters")
-        parameters = [ParameterValue(**p) for p in search_parameters]
+        parameters = [ParameterValue(**p) for p in search.pop("parameters")]
         return SearchResult(**search, parameters=parameters)
 
 
