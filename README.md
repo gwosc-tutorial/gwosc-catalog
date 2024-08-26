@@ -10,17 +10,23 @@ This package provides utilities for creating and validating community catalogs J
 
 1. Clone repo
 
-    `git clone git@github.com:gwosc-tutorial/gwosc-catalog.git`
+    ```
+    git clone git@github.com:gwosc-tutorial/gwosc-catalog.git
+    ```
 
 2. Install
 
-    `cd gwosc-catalog; pip install .`
+    ```
+    cd gwosc-catalog; pip install .
+    ```
 
 ## Validate upload schema
 
 To validate the schema, the library also installs the `validateschema` CLI program.
 
-    `validateschema path/to/mycatalog.json`
+```
+validateschema path/to/mycatalog.json
+```
 
 If `stdout` outputs no errors, the schema passed validation.
 
