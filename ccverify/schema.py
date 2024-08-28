@@ -210,11 +210,17 @@ class Event:
     event_description: str = ""
 
     def __post_init__(self):
-        n_defaults = np.count_nonzero([pe_set.is_preferred for pe_set in self.pe_sets])
-        if n_defaults != 1:
+        # Events cannot have empty search list
+        if len(self.search) == 0:
+            raise ValueError("Search list is empty.")
+        # Events can have empty PE sets
+        if len(self.pe_sets) == 0:
+            return
+        # If events have PE sets, exactly one should be preferred
+        n_preferred = np.count_nonzero([pe_set.is_preferred for pe_set in self.pe_sets])
+        if n_preferred != 1:
             raise ValueError(
-                "Exactly one of the `pe_sets` should be set to "
-                f"default, got {n_defaults}"
+                f"Exactly one of the `pe_sets` should be preferred, got {n_preferred}."
             )
 
     @classmethod
@@ -258,6 +264,10 @@ class Catalog:
     doi: str
     events: list[Event]
     schema_version: str = __version__
+
+    def __post_init__(self):
+        if len(self.events) == 0:
+            raise ValueError("Event list is empty.")
 
     def to_json(self, filename):
         """Write catalog to JSON file."""
