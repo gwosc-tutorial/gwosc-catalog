@@ -10,6 +10,17 @@ import pandas as pd
 from . import __version__
 
 
+__all__ = [
+    "ParameterValue",
+    "Link",
+    "SearchResult",
+    "ParameterSet",
+    "Event",
+    "Catalog",
+    "validate_schema",
+]
+
+
 UNITS = dict.fromkeys(
     (
         "chirp_mass_source",
