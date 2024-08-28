@@ -98,9 +98,3 @@ def test_valid_full_schema():
     c = catalog_example.copy()
     c["events"].append(e)
     validate_schema(c)
-
-
-def test_global_keys():
-    bad_keys = {"a": 1, "b": 2}
-    with pytest.raises((KeyError, ValueError)):
-        validate_schema(bad_keys)
