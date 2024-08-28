@@ -328,6 +328,12 @@ def _set_logger():
     logger.addHandler(handler)
 
 
+def validate_schema(upload_json):
+    """Return True if catalog passes validation."""
+    Catalog.from_json(upload_json)
+    return True
+
+
 def main():
     import argparse
 
@@ -340,7 +346,7 @@ def main():
     _set_logger()
     with open(args.filename) as fp:
         newcat = json.load(fp)
-    Catalog.from_json(newcat)
+    validate_schema(newcat)
 
 
 if __name__ == "__main__":

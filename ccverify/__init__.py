@@ -1,3 +1,3 @@
-from .core import verify_upload_schema
-
 __version__ = "0.1.0"
+
+from .schema import validate_schema
