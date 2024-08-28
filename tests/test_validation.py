@@ -87,14 +87,77 @@ link_example = {
 
 
 def test_valid_full_schema():
-    s = search_example.copy()
-    s["parameters"].extend([far_example, snr_example, pastro_example])
-    ps = pe_set_example.copy()
-    ps["parameters"].extend([pe_mass1_example, pe_distance_example])
-    ps["links"].append(link_example)
+    "Example catalog should pass."
     e = event_example.copy()
-    e["search"].append(s)
-    e["pe_sets"].append(ps)
+    s = search_example.copy()
+    s["parameters"] = [far_example, snr_example, pastro_example]
+    e["search"] = [s]
+    ps = pe_set_example.copy()
+    ps["parameters"] = [pe_mass1_example, pe_distance_example]
+    ps["links"] = [link_example]
+    e["pe_sets"] = [ps]
     c = catalog_example.copy()
-    c["events"].append(e)
+    c["events"] = [e]
+    validate_schema(c)
+
+
+def test_empty_events():
+    "Catalog with no events should fail."
+    with pytest.raises(ValueError):
+        validate_schema(catalog_example)
+
+
+def test_empty_pe_sets():
+    "Event with no pe_sets should pass."
+    e = event_example.copy()
+    s = search_example.copy()
+    s["parameters"] = [far_example, snr_example, pastro_example]
+    e["search"] = [s]
+    e["pe_sets"] = []
+    c = catalog_example.copy()
+    c["events"] = [e]
+    validate_schema(c)
+
+
+def test_empty_search():
+    "Catalog with an empty search should fail."
+    e = event_example.copy()
+    e["search"] = []
+    ps = pe_set_example.copy()
+    ps["parameters"] = [pe_mass1_example, pe_distance_example]
+    ps["links"] = [link_example]
+    e["pe_sets"] = [ps]
+    c = catalog_example.copy()
+    c["events"] = [e]
+    with pytest.raises(ValueError):
+        validate_schema(c)
+
+
+def test_empty_links():
+    "Catalog with empty links should pass."
+    e = event_example.copy()
+    s = search_example.copy()
+    s["parameters"] = [far_example, snr_example, pastro_example]
+    e["search"] = [s]
+    ps = pe_set_example.copy()
+    ps["parameters"] = [pe_mass1_example, pe_distance_example]
+    ps["links"] = []
+    e["pe_sets"] = [ps]
+    c = catalog_example.copy()
+    c["events"] = [e]
+    validate_schema(c)
+
+
+def test_missing_links():
+    "Catalog with missing links should pass."
+    e = event_example.copy()
+    s = search_example.copy()
+    s["parameters"] = [far_example, snr_example, pastro_example]
+    e["search"] = [s]
+    ps = pe_set_example.copy()
+    ps["parameters"] = [pe_mass1_example, pe_distance_example]
+    ps.pop("links", None)
+    e["pe_sets"] = [ps]
+    c = catalog_example.copy()
+    c["events"] = [e]
     validate_schema(c)
