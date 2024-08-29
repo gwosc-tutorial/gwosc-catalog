@@ -230,6 +230,10 @@ class Event:
         # Event name should have format GWYYMMDD_HHMMSS
         if not bool(re.match(r"^GW\d{6}_\d{6}$", self.event_name)):
             raise ValueError("Event name should have format GWYYMMDD_HHMMSS")
+        # Detectors validation
+        for detector in self.detectors:
+            if detector not in ["H1", "L1", "V1", "K1", "G1"]:
+                raise ValueError(f"Unrecognized detector short name: {detector}")
         # Events cannot have empty search list
         if len(self.search) == 0:
             raise ValueError("Search list is empty.")

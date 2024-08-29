@@ -195,3 +195,20 @@ def test_catalog_release_date_format():
     c["release_date"] = "2024-01-01T00:00:00"
     with pytest.raises(ValueError):
         validate_schema(c)
+
+
+def test_event_detector_names():
+    "Unrecognized event detector."
+    e = event_example.copy()
+    s = search_example.copy()
+    s["parameters"] = [far_example, snr_example, pastro_example]
+    e["search"] = [s]
+    ps = pe_set_example.copy()
+    ps["parameters"] = [pe_mass1_example, pe_distance_example]
+    ps["links"] = [link_example]
+    e["pe_sets"] = [ps]
+    c = catalog_example.copy()
+    c["events"] = [e]
+    e["detectors"] = ["HANFORD"]
+    with pytest.raises(ValueError):
+        validate_schema(c)
