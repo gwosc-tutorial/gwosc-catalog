@@ -5,6 +5,7 @@ a format compatible with the Gravitational Wave Open Science Center.
 import dataclasses
 import logging
 import json
+import re
 import numpy as np
 import pandas as pd
 from . import __version__
@@ -226,6 +227,9 @@ class Event:
     event_description: str = ""
 
     def __post_init__(self):
+        # Event name should have format GWYYMMDD_HHMMSS
+        if not bool(re.match(r"^GW\d{6}_\d{6}$", self.event_name)):
+            raise ValueError("Event name should have format GWYYMMDD_HHMMSS")
         # Events cannot have empty search list
         if len(self.search) == 0:
             raise ValueError("Search list is empty.")

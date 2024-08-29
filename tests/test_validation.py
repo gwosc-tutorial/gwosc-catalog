@@ -161,3 +161,20 @@ def test_missing_links():
     c = catalog_example.copy()
     c["events"] = [e]
     validate_schema(c)
+
+
+def test_event_name_format():
+    "Unrecognized event name format."
+    e = event_example.copy()
+    s = search_example.copy()
+    s["parameters"] = [far_example, snr_example, pastro_example]
+    e["search"] = [s]
+    ps = pe_set_example.copy()
+    ps["parameters"] = [pe_mass1_example, pe_distance_example]
+    ps["links"] = [link_example]
+    e["pe_sets"] = [ps]
+    c = catalog_example.copy()
+    c["events"] = [e]
+    e["event_name"] = "S123483"
+    with pytest.raises(ValueError):
+        validate_schema(c)
