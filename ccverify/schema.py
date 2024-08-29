@@ -290,6 +290,11 @@ class Catalog:
     def __post_init__(self):
         if len(self.events) == 0:
             raise ValueError("Event list is empty.")
+        if not bool(re.match(r"^\d{4}-\d{2}-\d{2}$", self.release_date)):
+            raise ValueError("Catalog release_date not in YYYY-MM-DD format.")
+        _, m, d = self.release_date.split("-")
+        if int(m) not in range(1, 13) or int(d) not in range(1, 32):
+            raise ValueError("Catalog release_date error.")
 
     def to_json(self, filename):
         """Write catalog to JSON file."""
