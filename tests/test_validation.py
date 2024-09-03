@@ -1,5 +1,5 @@
-from ccverify import validate_schema
 import pytest
+from ccverify import validate_schema
 
 catalog_example = {
     "schema_version": "1.0",

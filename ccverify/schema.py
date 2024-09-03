@@ -73,6 +73,7 @@ class ParameterValue:
 
     @classmethod
     def from_series(cls, parameter_name: str, series: pd.Series):
+        """Constructor from posterior samples."""
         q05, median, q95 = series.quantile((0.05, 0.5, 0.95))
         error = median - q05, q95 - median
         kwargs = _condition_value_and_error(median, error)
@@ -124,7 +125,8 @@ class SearchResult:
     parameters: list[ParameterValue]
 
     @classmethod
-    def from_json(cls, search):
+    def from_json(cls, search: dict):
+        """Constructor from a dict."""
         parameters = [ParameterValue(**p) for p in search.pop("parameters")]
         return SearchResult(**search, parameters=parameters)
 
@@ -182,7 +184,8 @@ class ParameterSet:
         )
 
     @classmethod
-    def from_json(cls, peset):
+    def from_json(cls, peset: dict):
+        """Constructor from a dict."""
         parameters = [ParameterValue(**p) for p in peset.pop("parameters")]
         links = [Link(**u) for u in peset.pop("links", [])]
         return ParameterSet(**peset, parameters=parameters, links=links)
@@ -235,7 +238,8 @@ class Event:
             )
 
     @classmethod
-    def from_json(cls, event):
+    def from_json(cls, event: dict):
+        """Constructor from a dict."""
         searches = event.pop("search")
         pe_sets = event.pop("pe_sets")
         return Event(
@@ -356,6 +360,7 @@ def validate_schema(upload_json):
 
 
 def main():
+    """Parse a JSON filename and validate its contents."""
     import argparse
 
     parser = argparse.ArgumentParser(
@@ -365,7 +370,7 @@ def main():
     parser.add_argument("filename", help="Json file to check")
     args = parser.parse_args()
     _set_logger()
-    with open(args.filename) as fp:
+    with open(args.filename, encoding="utf-8") as fp:
         newcat = json.load(fp)
     validate_schema(newcat)
 
