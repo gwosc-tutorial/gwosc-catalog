@@ -1,5 +1,5 @@
 import pytest
-from ccverify import validate_schema
+from ccverify import validate_schema, ParameterValue
 
 catalog_example = {
     "schema_version": "1.0",
@@ -212,3 +212,30 @@ def test_event_detector_names():
     e["detectors"] = ["HANFORD"]
     with pytest.raises(ValueError):
         validate_schema(c)
+
+
+def test_mass_unit():
+    "Mass unit should be solar mass."
+    with pytest.raises(ValueError):
+        unit = pe_mass1_example.pop("unit")
+        ParameterValue(**pe_mass1_example)
+    pe_mass1_example["unit"] = unit
+    ParameterValue(**pe_mass1_example)
+
+
+def test_distance_unit():
+    "Distance unit should be Mpc."
+    with pytest.raises(ValueError):
+        unit = pe_distance_example.pop("unit")
+        ParameterValue(**pe_distance_example)
+    pe_distance_example["unit"] = unit
+    ParameterValue(**pe_distance_example)
+
+
+def test_far_unit():
+    "FAR unit should be '1/year'."
+    with pytest.raises(ValueError):
+        unit = far_example.pop("unit")
+        ParameterValue(**far_example)
+    far_example["unit"] = unit
+    ParameterValue(**far_example)
