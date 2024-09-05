@@ -72,6 +72,28 @@ class ParameterValue:
     is_lower_bound: bool = False
     unit: str = None
 
+    def __post_init__(self):
+        if self.parameter_name in [
+            "chirp_mass_source",
+            "chirp_mass",
+            "mass_1_source",
+            "mass_2_source",
+            "total_mass_source",
+            "final_mass_source",
+        ]:
+            mass_units = ["solMass", "M_sun", "Msun"]
+            if self.unit not in mass_units:
+                raise ValueError(
+                    f"{self.parameter_name} parameter needs to have one "
+                    f"of {mass_units} string for `unit`."
+                )
+
+        if self.parameter_name == "luminosity_distance" and self.unit != "Mpc":
+            raise ValueError("luminosity_distance parameter needs to have Mpc `unit`.")
+
+        if self.parameter_name == "far" and self.unit != "1/year":
+            raise ValueError("far parameter needs to have '1/year' `unit`.")
+
     @classmethod
     def from_series(cls, parameter_name: str, series: pd.Series):
         """Constructor from posterior samples."""
