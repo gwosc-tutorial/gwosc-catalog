@@ -10,6 +10,7 @@ An example of the schema can be found below and the description of the keys afte
   "catalog_name": "string",
   "catalog_description": "string",
   "doi": "https://doi.org/12345/",
+  "release_date": "YYYY-MM-DD",
   "events": [
     {
       "event_name": "GWYYMMDD_HHMMSS",
@@ -48,6 +49,7 @@ An example of the schema can be found below and the description of the keys afte
           "pe_set_name": "string",
           "waveform_family": "IMRPhenomPv3HM",
           "data_url": "https://zenodo.org/",
+          "is_preferred": true,
           "parameters": [
             {
               "parameter_name": "mass_1_source",
@@ -97,6 +99,7 @@ An example of the schema can be found below and the description of the keys afte
     - `catalog_name`: (string) The name of the catalog.
     - `catalog_description`: (string) A description of the catalog.
     - `doi`: (string, url) The full URL to the publication DOI related to this catalog.
+    - `release_date`: The date of the public release of the data in the format `YYYY-MM-DD`.
 
 2. Events level
 

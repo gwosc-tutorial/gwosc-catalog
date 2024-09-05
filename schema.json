@@ -3,6 +3,7 @@
   "catalog_name": "string",
   "catalog_description": "string",
   "doi": "https://doi.org/12345/",
+  "release_date": "YYYY-MM-DD",
   "events": [
     {
       "event_name": "GWYYMMDD_HHMMSS",
@@ -41,6 +42,7 @@
           "pe_set_name": "string",
           "waveform_family": "IMRPhenomPv3HM",
           "data_url": "https://zenodo.org/",
+          "is_preferred": true,
           "parameters": [
             {
               "parameter_name": "mass_1_source",
