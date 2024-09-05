@@ -1,5 +1,5 @@
 import pytest
-from ccverify import validate_schema, ParameterValue
+from ccverify import validate_schema, ParameterValue, Event
 
 catalog_example = {
     "schema_version": "1.0",
@@ -239,3 +239,25 @@ def test_far_unit():
         ParameterValue(**far_example)
     far_example["unit"] = unit
     ParameterValue(**far_example)
+
+
+def test_unique_pe_set():
+    "Exactly one PE set should be preferred."
+    pe_sets = []
+    for i in range(3):
+        ps = pe_set_example.copy()
+        ps["pe_set_name"] = f"Pipeline {i + 1}"
+        ps.pop("is_preferred")
+        ps["parameters"] = [pe_mass1_example.copy(), pe_distance_example.copy()]
+        pe_sets.append(ps)
+    e = event_example.copy()
+    e["search"] = [search_example.copy()]
+    e["search"][0]["parameters"] = [far_example.copy()]
+    e["pe_sets"] = pe_sets
+    with pytest.raises(ValueError):
+        Event.from_json(e)
+    e["pe_sets"][1]["is_preferred"] = True
+    Event.from_json(e)
+    e["pe_sets"][2]["is_preferred"] = True
+    with pytest.raises(ValueError):
+        Event.from_json(e)
