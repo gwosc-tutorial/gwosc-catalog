@@ -127,8 +127,9 @@ class SearchResult:
     @classmethod
     def from_json(cls, search: dict):
         """Constructor from a dict."""
-        parameters = [ParameterValue(**p) for p in search.pop("parameters")]
-        return SearchResult(**search, parameters=parameters)
+        s = search.copy()
+        params = [ParameterValue(**p) for p in s.pop("parameters")]
+        return SearchResult(**s, parameters=params)
 
 
 @dataclasses.dataclass
@@ -186,9 +187,10 @@ class ParameterSet:
     @classmethod
     def from_json(cls, peset: dict):
         """Constructor from a dict."""
-        parameters = [ParameterValue(**p) for p in peset.pop("parameters")]
-        links = [Link(**u) for u in peset.pop("links", [])]
-        return ParameterSet(**peset, parameters=parameters, links=links)
+        ps = peset.copy()
+        parameters = [ParameterValue(**p) for p in ps.pop("parameters")]
+        links = [Link(**u) for u in ps.pop("links", [])]
+        return ParameterSet(**ps, parameters=parameters, links=links)
 
 
 @dataclasses.dataclass
@@ -240,10 +242,11 @@ class Event:
     @classmethod
     def from_json(cls, event: dict):
         """Constructor from a dict."""
-        searches = event.pop("search")
-        pe_sets = event.pop("pe_sets")
+        e = event.copy()
+        searches = e.pop("search")
+        pe_sets = e.pop("pe_sets")
         return Event(
-            **event,
+            **e,
             search=[SearchResult.from_json(s) for s in searches],
             pe_sets=[ParameterSet.from_json(pe_set) for pe_set in pe_sets],
         )
@@ -291,8 +294,9 @@ class Catalog:
 
     @classmethod
     def from_json(cls, catalog):
-        events = catalog.pop("events")
-        return Catalog(**catalog, events=[Event.from_json(event) for event in events])
+        c = catalog.copy()
+        events = c.pop("events")
+        return Catalog(**c, events=[Event.from_json(event) for event in events])
 
 
 def _condition_value_and_error(value, error) -> dict:
