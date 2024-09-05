@@ -94,6 +94,9 @@ class ParameterValue:
         if self.parameter_name == "far" and self.unit != "1/year":
             raise ValueError("far parameter needs to have '1/year' `unit`.")
 
+        if self.is_upper_bound and self.is_lower_bound:
+            raise ValueError("Both `is_upper_bound` and `is_lower_bound` set to True.")
+
     @classmethod
     def from_series(cls, parameter_name: str, series: pd.Series):
         """Constructor from posterior samples."""

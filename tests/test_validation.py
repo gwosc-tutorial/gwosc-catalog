@@ -261,3 +261,14 @@ def test_unique_pe_set():
     e["pe_sets"][2]["is_preferred"] = True
     with pytest.raises(ValueError):
         Event.from_json(e)
+
+
+def test_upper_lower_bound():
+    "Upper and lower bounds can not be both set."
+    p = pe_mass1_example.copy()
+    p.pop("is_upper_bound")
+    p.pop("is_lower_bound")
+    ParameterValue(**p)
+    p["is_upper_bound"] = p["is_lower_bound"] = True
+    with pytest.raises(ValueError):
+        ParameterValue(**p)
