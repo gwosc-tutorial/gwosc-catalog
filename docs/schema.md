@@ -91,7 +91,37 @@ An example of the schema can be found below and the description of the keys afte
 }
 ```
 
+## Overview
+
+This format will be used to create catalogs in the GWOSC Event Portal.  In many cases, looking
+at examples in the Event Portal can show how various keys are used.
+
+### Release List View
+
+The [Release List View](https://gwosc.org/eventapi/html/) shows the name of each catalog
+(`catalog_name`) along with the `catalog_description`.
+
+### Event List View
+
+The [Event List View](https://gwosc.org/eventapi/html/GWTC-3-confident/) shows the name of each
+event (`event_name`), along with a list of parameters for each event.  This view will show parameters
+with names that match the list of "Recognized Parameters" below.
+
+### Event Detail View
+
+The [Event Detail View](https://gwosc.org/eventapi/html/GWTC-3-confident/GW200129_065458/v1/)
+shows information about a single event.  The page lists each search and PE Set, along with
+all parameters associated with each one.
+
+The `data_url` is displayed for each PE set as a link to the "Source File".  This should point
+to the data release for each event, and often points to a posterior sample file if available.
+Additional `links` may optionally be added as well, which can point to any associated files
+or documentation that may help a user better understand the data.
+
+
 ## Description of the keys
+
+Keys marked "optional" are not required to be inlcuded.
 
 1. Root level
 
@@ -104,40 +134,39 @@ An example of the schema can be found below and the description of the keys afte
 2. Events level
 
     - `event_name`: (string) The name of the event using the convention `GWyymmdd_hhmmss`.
-    - `gps`: (float) The GPS time of the detection.
-    - `event_description`: (string) A short description of this event.
-    - `detectors`: (list(string)) A list of detector data used for this event.
+    - `gps`: (float) The GPS time of the detection.  Geocenter times are preferred.
+    - `event_description`: (string; optional) Can be used for any user notes for a particular event.  This appears in a box on the Event Detail View. 
+    - `detectors`: (list(string); optional) A list of detector data used for this event.  This parameter
+    should not be used by groups outside the LVK, as the default is to inlclude all available strain data
+    for an event.
 
 3. Search level
 
     - `pipeline_name`: (string) The name of the search pipeline.
 
-4. PE sets level
+4. PE sets level (Optional)
 
     - `pe_set_name`: (string) The pipeline used to generate the parameter estimations.
-    - `waveform_family`: (string) The name of the waveform family used in the estimation.
-    - `data_url`: (string, url) The full URL to the file that stores posterior samples.
+    - `waveform_family`: (string) Indicates the waveform approximate used for a PE set.  In LVK data
+    sets, this is a key that points to the associated posterior samples within the data release file.
+    - `data_url`: (string, url)  This should point to the data release for each event, and often points to a posterior sample file if available.   
     - `is_preferred`: (bool) `true` if this set should be the preferred one to pick parameter values from.
         Exactly one of the PE sets must be preferred in order for results to be properly displayed
         in the catalog table. If this key is omitted, it defaults to `false`.
 
-A list of waveform family names can be found in the lalsuite code site [https://lscsoft.docs.ligo.org/lalsuite/](https://lscsoft.docs.ligo.org/lalsuite/).
-
 5. Parameters level
 
     - `parameter_name`: (string) Name of the parameter being estimated. See allowed values below.
-    - `median`: (float) Median value of the posterior distribution.
-    - `upper_95`: (float) Upper bound of the 95% confidence region.
-    - `lower_05`: (float) Lower bound of the 95% confidence region.
-    - `is_upper_bound`: (bool) `true` if this value is an upper bound, `false` otherwise. Defaults to `false` if omitted.
-    - `is_lower_bound`: (bool) `true` if this value is an upper bound, `false` otherwise. Defaults to `false` if omitted.
+    - `best`: (float) Value for a parameter (often the median value of the posterior distribution)
+    - `upper_value`: (float; optional) Upper bound of the 90% credible region.
+    - `lower_value`: (float; optional) Lower bound of the 90% credible region.
+    - `is_upper_bound`: (bool; optional) `true` if this value is an upper bound, `false` otherwise. Defaults to `false` if omitted.  Setting this to `true` diplays a less-than sign before the value.
+    - `is_lower_bound`: (bool; optional) `true` if this value is an upper bound, `false` otherwise. Defaults to `false` if omitted.  Setting this to `true` displays a greater-than sign before the value.
     - `decimal_places`: (int) Number of decimal places of the best value to display, must be >= 0.
     - `unit`: The physical unit of the `median` value. See below for allowed values.
-    - `links`: (object | null) Links to external resources. This section can be omitted.
+    - `links`: (object; optional) Links to any additional documentation or files that are helpful for the user.
 
 6. Links level (optional)
-
-    Note: For a link to posterior samples, use `data_url` under PE sets level.
 
     - `url`: (string, url) URL to external resource.
     - `content_type`: (string) The type of the resource: "skymap", "documentation", etc.
@@ -145,7 +174,7 @@ A list of waveform family names can be found in the lalsuite code site [https://
 
 ## Notes
 
-Allowed values for PE `parameter_name` keys are:
+Recognized values for PE `parameter_name` keys are:
 
 * `chirp_mass_source`: The chirp mass of the binary as measured in the source frame.
 * `chirp_mass`: The chirp mass of the binary in detector frame.
