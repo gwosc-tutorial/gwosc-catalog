@@ -103,18 +103,22 @@ The [Release List View](https://gwosc.org/eventapi/html/) shows the name of each
 
 ### Event List View
 
-The [Event List View](https://gwosc.org/eventapi/html/GWTC-3-confident/) shows the name of each
-event (`event_name`), along with a list of parameters for each event.  This view will show parameters
+The [Event List View](https://gwosc.org/eventapi/html/GWTC-3-confident/)
+shows the name of each
+event (`event_name`), along with a list of parameters for each event.
+It will also display the `catalog_description` and `catalog_name`.
+This view will display the values of all parameters
 with names that match the list of "Recognized Parameters" below.
 
 ### Event Detail View
 
 The [Event Detail View](https://gwosc.org/eventapi/html/GWTC-3-confident/GW200129_065458/v1/)
 shows information about a single event.  The page lists each search and PE Set, along with
-all parameters associated with each one.
+all parameters associated with each one, including both recognized parameters and
+any additional parameters (see "Notes" below).
 
 The `data_url` is displayed for each PE set as a link to the "Source File".  This should point
-to the data release for each event, and often points to a posterior sample file if available.
+to the data release for each event, and usually points to a posterior sample file if available.
 Additional `links` may optionally be added as well, which can point to any associated files
 or documentation that may help a user better understand the data.
 
@@ -137,7 +141,7 @@ Keys marked "optional" are not required to be inlcuded.
     - `gps`: (float) The GPS time of the detection.  Geocenter times are preferred.
     - `event_description`: (string; optional) Can be used for any user notes for a particular event.  This appears in a box on the Event Detail View. 
     - `detectors`: (list(string); optional) A list of detectors for which strain data should be
-    publicly released for this event.  This parameter is not needed for groups outside the LVK.
+    publicly released for this event.  This parameter is not necessary for groups outside the LVK.
 
 3. Search level
 
@@ -150,9 +154,11 @@ Keys marked "optional" are not required to be inlcuded.
     sets, this is a key that points to the associated posterior samples within the data release file.
     - `data_url`: (string, url; optional)  This should point to the source data for the analysis of each event.  It 
     typically points to a posterior sample file if available.   
-    - `is_preferred`: (bool; optional) `true` if this set should be the preferred one to pick parameter values from.
-        Exactly one of the PE sets must be preferred in order for results to be properly displayed
-        in the catalog table. If this key is omitted, it defaults to `false`.
+    - `is_preferred`: (bool; optional) The `is_preferred` PE set will be used to
+    display parameter values on the "Event List" view.  
+        Exactly one of the PE sets must have `is_preferred = true` in order for
+	"Recognized Parameter" values to be properly displayed
+        in the Event List. If this key is omitted, it defaults to `false`.
 
 5. Parameters level
 
@@ -179,7 +185,6 @@ Keys marked "optional" are not required to be inlcuded.
 Recognized values for PE `parameter_name` keys are:
 
 * `chirp_mass_source`: The chirp mass of the binary as measured in the source frame.
-* `chirp_mass`: The chirp mass of the binary in detector frame.
 * `mass_1_source`: The source mass of the heavier compact object in the merger, as measured in the source frame.
 * `mass_2_source`: The source mass of the lighter compact object in the merger, as measured in the source frame.
 * `total_mass_source`: The total mass of the binary as measured in the source frame.
@@ -196,6 +201,7 @@ Recognized values for search `parameter_name` keys are:
 * `snr`: The network Signal to Noise Ratio of the signal.
 * `pastro`: The probability of astronomical origin, assuming a compact binary.
 * `far`: The False Alarm Rate of the detection in events per year.
+* `chirp_mass`: The chirp mass of the binary in detector frame.
 
 Other values for `name` are permitted and will be displayed on the Event Detail page, but not the Event List page.
 If multiple search pipeline results are included, the most significant values for `snr`, `pastro`, and `far` will
