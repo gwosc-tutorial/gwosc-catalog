@@ -136,9 +136,8 @@ Keys marked "optional" are not required to be inlcuded.
     - `event_name`: (string) The name of the event using the convention `GWyymmdd_hhmmss`.
     - `gps`: (float) The GPS time of the detection.  Geocenter times are preferred.
     - `event_description`: (string; optional) Can be used for any user notes for a particular event.  This appears in a box on the Event Detail View. 
-    - `detectors`: (list(string); optional) A list of detector data used for this event.  This parameter
-    should not be used by groups outside the LVK, as the default is to inlclude all available strain data
-    for an event.
+    - `detectors`: (list(string); optional) A list of detectors for which strain data should be
+    publicly released for this event.  This parameter is not needed for groups outside the LVK.
 
 3. Search level
 
@@ -149,8 +148,9 @@ Keys marked "optional" are not required to be inlcuded.
     - `pe_set_name`: (string) The pipeline used to generate the parameter estimations.
     - `waveform_family`: (string) Indicates the waveform approximate used for a PE set.  In LVK data
     sets, this is a key that points to the associated posterior samples within the data release file.
-    - `data_url`: (string, url)  This should point to the data release for each event, and often points to a posterior sample file if available.   
-    - `is_preferred`: (bool) `true` if this set should be the preferred one to pick parameter values from.
+    - `data_url`: (string, url; optional)  This should point to the source data for the analysis of each event.  It 
+    typically points to a posterior sample file if available.   
+    - `is_preferred`: (bool; optional) `true` if this set should be the preferred one to pick parameter values from.
         Exactly one of the PE sets must be preferred in order for results to be properly displayed
         in the catalog table. If this key is omitted, it defaults to `false`.
 
@@ -174,6 +174,8 @@ Keys marked "optional" are not required to be inlcuded.
 
 ## Notes
 
+### Recgonized parameters
+
 Recognized values for PE `parameter_name` keys are:
 
 * `chirp_mass_source`: The chirp mass of the binary as measured in the source frame.
@@ -186,24 +188,27 @@ Recognized values for PE `parameter_name` keys are:
 * `luminosity_distance`: The luminosity distance to the source.
 * `redshift`: The calculated redshift.
 
-A list for all PE standard names used by ligo is listed at LSC Soft site [https://lscsoft.docs.ligo.org/pesummary/stable/gw/parameters.html](https://lscsoft.docs.ligo.org/pesummary/stable/gw/parameters.html).
+A list for all PE standard names used by the LVK is listed at [https://lscsoft.docs.ligo.org/pesummary/stable/gw/parameters.html](https://lscsoft.docs.ligo.org/pesummary/stable/gw/parameters.html).
 
-Allowed values for search `parameter_name` keys are:
+Recognized values for search `parameter_name` keys are:
 
 * `snr`: The network Signal to Noise Ratio of the Matched Filtering.
 * `pastro`: The probability of astronomical origin, assuming a compact binary.
 * `far`: The False Alarm Rate of the detection in events per year.
 
-Other values for `name` are permitted but will generate a warning message.
-
-In case of being more than one search pipeline, the chosen figures to display will be the best values for the whole set.
+Other values for `name` are permitted and will be displayed on the Event Detail page, but not the Event List page.
+If multiple search pipeline results are included, the most significant values for `snr`, `pastro`, and `far` will
+be displayed on the Event List page.  If multiple PE sets are included, the values from the PE set marked as
+`is_preferred` = `true` will be displayed on the Event List page.
 
 ### Units
 
-All masses MUST be in units of solar masses. Acceptable values for solar mass abbreviation are the ones accepted by [astropy units](https://docs.astropy.org/en/stable/units/ref_api.html#module-astropy.units.astrophys) module: [`solMass`, `M_sun`, `Msun`].
+In most cases, we accept any units recognized by [astropy units](https://docs.astropy.org/en/stable/units/ref_api.html#module-astropy.units.astrophys), and we will convert to our preferred units.
 
-The `luminosity_distance` `unit` key MUST have the value `Mpc`.
+Preferred units are:
 
-The `far` `unit` key MUST have the value `1/year`.
-
-For dimensionless units, the key can be omitted or set to `null`.
+ * Mass in solar masses (`Msun`)
+ * Distance in `Mpc`
+ * False Alarm Rate in `1/year`
+ * For dimenonless quantities, units can be omitted or set to `null`
+ 
