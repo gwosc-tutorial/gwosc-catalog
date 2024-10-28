@@ -23,22 +23,22 @@ An example of the schema can be found below and the description of the keys afte
           "parameters": [
             {
               "parameter_name": "far",
-              "median": 0.00001,
+              "best": 0.00001,
               "is_upper_bound": true,
               "decimal_places": 5,
               "unit": "1/year"
             },
             {
               "parameter_name": "pastro",
-              "median": 0.99,
+              "best": 0.99,
               "is_lower_bound": true,
               "decimal_places": 2
             },
             {
               "parameter_name": "snr",
-              "median": 9.34,
-              "upper_95": 0.01,
-              "lower_05": 0.01,
+              "best": 9.34,
+              "upper_error": 0.01,
+              "lower_error": 0.01,
               "decimal_places": 2
             }
           ]
@@ -158,8 +158,8 @@ Keys marked "optional" are not required to be inlcuded.
 
     - `parameter_name`: (string) Name of the parameter being estimated. See allowed values below.
     - `best`: (float) Value for a parameter (often the median value of the posterior distribution)
-    - `upper_value`: (float; optional) Upper bound of the 90% credible region.
-    - `lower_value`: (float; optional) Lower bound of the 90% credible region.
+    - `upper_error`: (float; optional) Size of the upper error-bar of the 90% credible region.  OK to use different uncertainty definition if noted in documentation.
+    - `lower_error`: (float; optional) Size of the lower error-bar of the 90% credible region.  OK to use a different uncertainty definition if noted in documentation.
     - `is_upper_bound`: (bool; optional) `true` if this value is an upper bound, `false` otherwise. Defaults to `false` if omitted.  Setting this to `true` diplays a less-than sign before the value.
     - `is_lower_bound`: (bool; optional) `true` if this value is an upper bound, `false` otherwise. Defaults to `false` if omitted.  Setting this to `true` displays a greater-than sign before the value.
     - `decimal_places`: (int) Number of decimal places of the best value to display, must be >= 0.  Displayed values will be rounded to this number of decimal places.
