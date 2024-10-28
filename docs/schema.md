@@ -162,7 +162,7 @@ Keys marked "optional" are not required to be inlcuded.
     - `lower_value`: (float; optional) Lower bound of the 90% credible region.
     - `is_upper_bound`: (bool; optional) `true` if this value is an upper bound, `false` otherwise. Defaults to `false` if omitted.  Setting this to `true` diplays a less-than sign before the value.
     - `is_lower_bound`: (bool; optional) `true` if this value is an upper bound, `false` otherwise. Defaults to `false` if omitted.  Setting this to `true` displays a greater-than sign before the value.
-    - `decimal_places`: (int) Number of decimal places of the best value to display, must be >= 0.
+    - `decimal_places`: (int) Number of decimal places of the best value to display, must be >= 0.  Displayed values will be rounded to this number of decimal places.
     - `unit`: The physical unit of the `median` value. See below for allowed values.
     - `links`: (object; optional) Links to any additional documentation or files that are helpful for the user.
 
@@ -188,11 +188,12 @@ Recognized values for PE `parameter_name` keys are:
 * `luminosity_distance`: The luminosity distance to the source.
 * `redshift`: The calculated redshift.
 
-A list for all PE standard names used by the LVK is listed at [https://lscsoft.docs.ligo.org/pesummary/stable/gw/parameters.html](https://lscsoft.docs.ligo.org/pesummary/stable/gw/parameters.html).
+
+A list of parameters commonly used in PE by the LVK collaboration is at [https://lscsoft.docs.ligo.org/pesummary/stable/gw/parameters.html](https://lscsoft.docs.ligo.org/pesummary/stable/gw/parameters.html).
 
 Recognized values for search `parameter_name` keys are:
 
-* `snr`: The network Signal to Noise Ratio of the Matched Filtering.
+* `snr`: The network Signal to Noise Ratio of the signal.
 * `pastro`: The probability of astronomical origin, assuming a compact binary.
 * `far`: The False Alarm Rate of the detection in events per year.
 
