@@ -202,6 +202,9 @@ If multiple search pipeline results are included, the most significant values fo
 be displayed on the Event List page.  If multiple PE sets are included, the values from the PE set marked as
 `is_preferred` = `true` will be displayed on the Event List page.
 
+If the `snr` is available both from PE and search pipelines, then the
+value from the preferred PE pipeline will be used on the Event List page.
+
 ### Units
 
 In most cases, we accept any units recognized by [astropy units](https://docs.astropy.org/en/stable/units/ref_api.html#module-astropy.units.astrophys), and we will convert to our preferred units.
