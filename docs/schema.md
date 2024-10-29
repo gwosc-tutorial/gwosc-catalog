@@ -125,7 +125,7 @@ or documentation that may help a user better understand the data.
 
 ## Description of the keys
 
-Keys marked "optional" are not required to be inlcuded.
+Keys marked "optional" are not required to be inlcuded; other keys are required.  
 
 1. Root level
 
@@ -203,7 +203,9 @@ Recognized values for search `parameter_name` keys are:
 * `far`: The False Alarm Rate of the detection in events per year.
 * `chirp_mass`: The chirp mass of the binary in detector frame.
 
-Other values for `name` are permitted and will be displayed on the Event Detail page, but not the Event List page.
+Other values for `name` are permitted and will be displayed on the Event Detail page, with the exceptions of
+"p_astro" and "network_matched_filter_snr", which are reserve keywords and should not be used.
+
 If multiple search pipeline results are included, the most significant values for `snr`, `pastro`, and `far` will
 be displayed on the Event List page.  If multiple PE sets are included, the values from the PE set marked as
 `is_preferred` = `true` will be displayed on the Event List page.
