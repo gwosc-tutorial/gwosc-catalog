@@ -6,7 +6,7 @@ An example of the schema can be found below and the description of the keys afte
 
 ```json
 {
-  "schema_version": "1.0",
+  "schema_version": "0.1.0a1",
   "catalog_name": "string",
   "catalog_description": "string",
   "doi": "https://doi.org/12345/",
