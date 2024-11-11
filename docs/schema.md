@@ -150,7 +150,7 @@ Keys marked "optional" are not required to be inlcuded; other keys are required.
 4. PE sets level (Optional)
 
     - `pe_set_name`: (string) The pipeline used to generate the parameter estimations.
-    - `waveform_family`: (string) Indicates the waveform approximate used for a PE set.  In LVK data
+    - `waveform_family`: (string) Indicates the waveform approximant used for a PE set.  In LVK data
     sets, this is a key that points to the associated posterior samples within the data release file.
     - `data_url`: (string, url; optional)  This should point to the source data for the analysis of each event.  It 
     typically points to a posterior sample file if available.   

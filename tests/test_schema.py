@@ -18,14 +18,14 @@ example_catalog = {
                     "parameters": [
                         {
                             "parameter_name": "far",
-                            "median": 0.00001,
+                            "best": 0.00001,
                             "is_upper_bound": True,
                             "decimal_places": 5,
                             "unit": "1/year",
                         },
                         {
                             "parameter_name": "pastro",
-                            "median": 0.99,
+                            "best": 0.99,
                             "is_lower_bound": True,
                             "decimal_places": 2,
                         },
@@ -45,14 +45,14 @@ example_catalog = {
                     "parameters": [
                         {
                             "parameter_name": "far",
-                            "median": 0.00001,
+                            "best": 0.00001,
                             "is_upper_bound": True,
                             "decimal_places": 5,
                             "unit": "1/year",
                         },
                         {
                             "parameter_name": "pastro",
-                            "median": 0.99,
+                            "best": 0.99,
                             "is_lower_bound": True,
                             "decimal_places": 2,
                         },
@@ -67,9 +67,9 @@ example_catalog = {
                     "parameters": [
                         {
                             "parameter_name": "mass_1_source",
-                            "median": 3.34,
-                            "upper_95": 0.01,
-                            "lower_05": 0.01,
+                            "best": 3.34,
+                            "upper_error": 0.01,
+                            "lower_error": 0.01,
                             "is_upper_bound": False,
                             "is_lower_bound": False,
                             "decimal_places": 2,
