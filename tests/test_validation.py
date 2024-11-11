@@ -1,5 +1,5 @@
 import pytest
-from ccverify import (
+from gwosc_catalog import (
     validate_schema,
     ParameterValue,
     Event,

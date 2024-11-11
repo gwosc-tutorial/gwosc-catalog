@@ -1,4 +1,4 @@
-from ccverify import validate_schema, __version__ as schema_version
+from gwosc_catalog import validate_schema, __version__ as schema_version
 from deepdiff.diff import DeepDiff
 
 example_catalog = {
