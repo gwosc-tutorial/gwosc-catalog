@@ -255,6 +255,10 @@ class Event:
         Can be used for any user notes for a particular event.
         This appears in a box on the Event Detail View.
 
+    gracedb_id: str or None
+        The associated GraceDB superevent ID if any.
+        This is an optional key but we recommend adding it whenever possible.
+
     detectors: list[str]
         A list of detectors for which strain data should be publicly
         released for this event.
@@ -270,6 +274,7 @@ class Event:
     event_name: str
     gps: float
     search: list[SearchResult]
+    gracedb_id: str = None
     pe_sets: list[ParameterSet] = None
     detectors: list[str] = None
     event_description: str = None
