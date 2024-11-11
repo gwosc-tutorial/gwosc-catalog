@@ -3,9 +3,9 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ccverify"
+name = "gwosc-catalog"
 authors = [{ name = "GWOSC", email = "gwosc@igwn.org" }]
-description = "Upload Schema for GWOSC Community Catalogs"
+description = "Upload Schema for GWOSC Catalogs"
 maintainers = [{ name = "Community Catalog Dev Team", email = "gwosc@igwn.org" }]
 readme = "README.md"
 dynamic = ["version"]
@@ -26,10 +26,10 @@ documentation = "https://github.com/gwosc-tutorial/gwosc-catalog"
 repository = "https://github.com/gwosc-tutorial/gwosc-catalog"
 
 [tool.setuptools]
-packages = ["ccverify"]
+packages = ["gwosc_catalog"]
 
 [project.scripts]
-validateschema = "ccverify.schema:main"
+validateschema = "gwosc_catalog.schema:main"
 
 [tool.setuptools.dynamic]
-version = {attr = "ccverify.__version__"}
+version = {attr = "gwosc_catalog.__version__"}
