@@ -20,6 +20,7 @@ event_example = {
     "gps": 1234567890.1,
     "event_description": "string or null",
     "detectors": ["H1", "L1"],
+    "gracedb_id": "S231001ab",
     "search": [],
     "pe_sets": [],
 }
@@ -267,6 +268,18 @@ def test_data_url_optional():
     validate_schema(c)
 
 
+def test_gracedb_id_optional():
+    "gracedb_id key can be omited."
+    e = event_example.copy()
+    s = search_example.copy()
+    s["parameters"] = [far_example, snr_example, pastro_example]
+    e["search"] = [s]
+    del e["gracedb_id"]
+    c = catalog_example.copy()
+    c["events"] = [e]
+    validate_schema(c)
+
+
 def test_mass_unit():
     "Mass unit should be solar mass."
     with pytest.raises(ValueError):
@@ -333,6 +346,7 @@ def test_upper_lower_error_optional():
     p.pop("upper_error")
     p.pop("lower_error")
     ParameterValue(**p)
+
 
 def test_schema_version_warning():
     "Different schema warning"

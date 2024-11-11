@@ -12,6 +12,7 @@ example_catalog = {
             "gps": 1234567890.1,
             "event_description": "string or null",
             "detectors": ["H1", "L1"],
+            "gracedb_id": "S231001ab",
             "search": [
                 {
                     "pipeline_name": "string",

@@ -17,6 +17,7 @@ An example of the schema can be found below and the description of the keys afte
       "gps": 1234567890.1,
       "event_description": "string or null",
       "detectors": ["H1", "L1"],
+      "gracedb_id": "S220911ab",
       "search": [
         {
           "pipeline_name": "string",
@@ -142,6 +143,8 @@ Keys marked "optional" are not required to be inlcuded; other keys are required.
     - `event_description`: (string; optional) Can be used for any user notes for a particular event.  This appears in a box on the Event Detail View. 
     - `detectors`: (list(string); optional) A list of detectors for which strain data should be
     publicly released for this event.  This parameter is not necessary for groups outside the LVK.
+    - `gracedb_id`: (str; optional) The associated GraceDB superevent ID if any.
+    This is an optional key but we recommend adding it whenever possible.
 
 3. Search level
 
