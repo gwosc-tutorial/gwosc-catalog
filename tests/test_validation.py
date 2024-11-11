@@ -1,8 +1,13 @@
 import pytest
-from ccverify import validate_schema, ParameterValue, Event
+from ccverify import (
+    validate_schema,
+    ParameterValue,
+    Event,
+    __version__ as schema_version,
+)
 
 catalog_example = {
-    "schema_version": "1.0",
+    "schema_version": schema_version,
     "catalog_name": "string",
     "catalog_description": "string",
     "doi": "https://doi.org/12345/",
@@ -328,3 +333,15 @@ def test_upper_lower_error_optional():
     p.pop("upper_error")
     p.pop("lower_error")
     ParameterValue(**p)
+
+def test_schema_version_warning():
+    "Different schema warning"
+    e = event_example.copy()
+    s = search_example.copy()
+    s["parameters"] = [far_example, snr_example, pastro_example]
+    e["search"] = [s]
+    c = catalog_example.copy()
+    c["events"] = [e]
+    c["schema_version"] = "wrong-version"
+    with pytest.warns(UserWarning):
+        validate_schema(c)
