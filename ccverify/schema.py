@@ -2,6 +2,7 @@
 Dataclasses for organizing a catalog of parameter estimation results in
 a format compatible with the Gravitational Wave Open Science Center.
 """
+
 import dataclasses
 import logging
 import json
@@ -42,32 +43,44 @@ class ParameterValue:
     Fields
     ------
     parameter_name: str
-        Parameter name.
+        Name of the parameter being estimated.
 
-    median: float
-        Median value.
+    best: float
+        Value for a parameter (often the median value of the
+        posterior distribution).
 
-    upper_95: float
-        95th percentile minus median.
+    upper_error: float
+        Size of the upper error-bar of the 90% credible region.
+        OK to use different uncertainty definition if noted in documentation.
 
-    lower_05: float
-        5th percentile minus median.
+    lower_error: float
+        Size of the lower error-bar of the 90% credible region.
+        OK to use a different uncertainty definition if noted in documentation.
 
-    is_upper_bound, is_lower_bound: bool
-        True if this value is an upper or lower bound, False otherwise.
+    is_upper_bound: bool
+        True if this value is an upper bound, False otherwise.
+        Defaults to False if omitted.
+        Setting this to True diplays a less-than sign before the value.
+
+    is_lower_bound: bool
+        True if this value is an upper bound, False otherwise.
+        Defaults to False if omitted.
+        Setting this to True displays a greater-than sign before the value.
 
     decimal_places: int
-        Number of places after the decimal point to display.
+        Number of decimal places of the best value to display, must be >= 0.
+        Displayed values will be rounded to this number of decimal places.
 
     unit: str or None
-        The physical unit of the parameter. Set to ``None`` for dimensionless units.
+        The physical unit of the best value.
+        Set to ``None`` for dimensionless units.
     """
 
     parameter_name: str
     decimal_places: int
-    median: float
-    upper_95: float = None
-    lower_05: float = None
+    best: float
+    upper_error: float = None
+    lower_error: float = None
     is_upper_bound: bool = False
     is_lower_bound: bool = False
     unit: str = None
@@ -165,25 +178,31 @@ class ParameterSet:
     Fields
     ------
     pe_set_name: str
-        Name of the parameter-estimation pipeline.
+        The pipeline name used to generate the parameter estimations.
 
     data_url: str, url
-        The full URL to the file that stores posterior samples.
+        This should point to the source data for the analysis of each event.
+        It typically points to a posterior sample file if available.
 
     waveform_family: str
-        The name of the waveform family used for the estimation.
+        The waveform approximant used for this parameter set.
 
     parameters: list of ``ParameterValue``
-        Contains entries reporting `mass_1_source`, `chirp_mass`, `luminosity_distance`, etc.
+        Contains entries reporting `mass_1_source`, `chirp_mass`,
+        `luminosity_distance`, etc.
+
+    is_preferred: (bool; optional)
+        Used to display parameter values on the "Event List" view.
+        If omitted, it defaults to False.
 
     links: list of ``Link`` objects, or None
         Links to external resources.
     """
 
     pe_set_name: str
-    data_url: str
     waveform_family: str
     parameters: list[ParameterValue]
+    data_url: str = None
     is_preferred: bool = False
     links: list[Link] = None
 
@@ -229,13 +248,16 @@ class Event:
         The name of the event using the convention `GWyymmdd_hhmmss`.
 
     gps: float
-        The GPS time of the detection.
+        The GPS time of the detection. Geocenter times are preferred.
 
-    event_description: str
-        A short description of this event.
+    event_description: str or None
+        Can be used for any user notes for a particular event.
+        This appears in a box on the Event Detail View.
 
     detectors: list[str]
-        A list of detector data used for this event.
+        A list of detectors for which strain data should be publicly
+        released for this event.
+        This parameter is not necessary for groups outside the LVK.
 
     search: ``SearchResult``
         A ``SearchResult`` object.
@@ -246,24 +268,27 @@ class Event:
 
     event_name: str
     gps: float
-    detectors: list[str]
     search: list[SearchResult]
-    pe_sets: list[ParameterSet]
-    event_description: str = ""
+    pe_sets: list[ParameterSet] = None
+    detectors: list[str] = None
+    event_description: str = None
 
     def __post_init__(self):
         # Event name should have format GWYYMMDD_HHMMSS
         if not bool(re.match(r"^GW\d{6}_\d{6}$", self.event_name)):
             raise ValueError("Event name should have format GWYYMMDD_HHMMSS")
         # Detectors validation
-        for detector in self.detectors:
-            if detector not in ["H1", "L1", "V1", "K1", "G1"]:
-                raise ValueError(f"Unrecognized detector short name: {detector}")
+        if self.detectors is not None:
+            for detector in self.detectors:
+                if detector not in ["H1", "L1", "V1", "K1", "G1"]:
+                    raise ValueError(f"Unrecognized detector short name: {detector}")
         # Events cannot have empty search list
         if len(self.search) == 0:
             raise ValueError("Search list is empty.")
         # Events can have empty PE sets
-        if len(self.pe_sets) == 0:
+        if self.pe_sets is None:
+            return
+        elif len(self.pe_sets) == 0:
             return
         # If events have PE sets, exactly one should be preferred
         n_preferred = np.count_nonzero([pe_set.is_preferred for pe_set in self.pe_sets])
@@ -277,11 +302,12 @@ class Event:
         """Constructor from a dict."""
         e = event.copy()
         searches = e.pop("search")
-        pe_sets = e.pop("pe_sets")
+        pe_sets = e.pop("pe_sets", [])
         return Event(
             **e,
             search=[SearchResult.from_json(s) for s in searches],
-            pe_sets=[ParameterSet.from_json(pe_set) for pe_set in pe_sets],
+            # Make a list of ParameterSets only if it's non-empty
+            pe_sets=[ParameterSet.from_json(pe_set) for pe_set in pe_sets] or None,
         )
 
 
@@ -292,13 +318,13 @@ class Catalog:
     Fields
     ------
     schema_version: str
-        The schema version.
+        The version of the schema used. Autopopulated.
 
     catalog_name: str
         The name of the catalog.
 
     release_date: str
-        Release date of the catalog in YYYY-MM-DD format.
+        The date of the public release of the data in the format YYYY-MM-DD.
 
     catalog_description: str
         A description of the catalog.
@@ -353,8 +379,8 @@ def _condition_value_and_error(value, error) -> dict:
     if min_error == 0:
         return {
             "median": float(f"{value:.2g}"),
-            "lower_05": float(f"{-error[0]:.2g}"),
-            "upper_95": float(f"{error[1]:.2g}"),
+            "lower_error": float(f"{-error[0]:.2g}"),
+            "upper_error": float(f"{error[1]:.2g}"),
             "decimal_places": max(0, _first_decimal_place(value) + 1),
         }
 
@@ -372,9 +398,9 @@ def _condition_value_and_error(value, error) -> dict:
     err_minus = truncate(value - error[0] - truncated_value)
     err_plus = truncate(value + error[1] - truncated_value)
     return {
-        "median": truncated_value,
-        "lower_05": err_minus,
-        "upper_95": err_plus,
+        "best": truncated_value,
+        "lower_error": err_minus,
+        "upper_error": err_plus,
         "decimal_places": max(0, decimal_places),
     }
 

@@ -26,7 +26,7 @@ search_example = {
 
 far_example = {
     "parameter_name": "far",
-    "median": 0.00001,
+    "best": 0.00001,
     "is_upper_bound": True,
     "decimal_places": 5,
     "unit": "1/year",
@@ -34,16 +34,16 @@ far_example = {
 
 pastro_example = {
     "parameter_name": "pastro",
-    "median": 0.99,
+    "best": 0.99,
     "is_lower_bound": True,
     "decimal_places": 2,
 }
 
 snr_example = {
     "parameter_name": "snr",
-    "median": 9.34,
-    "upper_95": 0.01,
-    "lower_05": 0.01,
+    "best": 9.34,
+    "upper_error": 0.01,
+    "lower_error": 0.01,
     "decimal_places": 2,
 }
 
@@ -58,9 +58,9 @@ pe_set_example = {
 
 pe_mass1_example = {
     "parameter_name": "mass_1_source",
-    "median": 3.34,
-    "upper_95": 0.01,
-    "lower_05": 0.01,
+    "best": 3.34,
+    "upper_error": 0.01,
+    "lower_error": 0.01,
     "is_upper_bound": False,
     "is_lower_bound": False,
     "decimal_places": 2,
@@ -69,9 +69,9 @@ pe_mass1_example = {
 
 pe_distance_example = {
     "parameter_name": "luminosity_distance",
-    "median": 130,
-    "upper_95": 5,
-    "lower_05": 2,
+    "best": 130,
+    "upper_error": 5,
+    "lower_error": 2,
     "is_upper_bound": False,
     "is_lower_bound": False,
     "decimal_places": 0,
@@ -113,7 +113,7 @@ def test_empty_pe_sets():
     s = search_example.copy()
     s["parameters"] = [far_example, snr_example, pastro_example]
     e["search"] = [s]
-    e["pe_sets"] = []
+    del e["pe_sets"]
     c = catalog_example.copy()
     c["events"] = [e]
     validate_schema(c)
@@ -214,6 +214,54 @@ def test_event_detector_names():
         validate_schema(c)
 
 
+def test_detectors_optional():
+    "Detectors key can be omited."
+    e = event_example.copy()
+    del e["detectors"]
+    s = search_example.copy()
+    s["parameters"] = [far_example, snr_example, pastro_example]
+    e["search"] = [s]
+    ps = pe_set_example.copy()
+    ps["parameters"] = [pe_mass1_example, pe_distance_example]
+    ps["links"] = [link_example]
+    e["pe_sets"] = [ps]
+    c = catalog_example.copy()
+    c["events"] = [e]
+    validate_schema(c)
+
+
+def test_event_description_optional():
+    "event_description key can be omited."
+    e = event_example.copy()
+    del e["event_description"]
+    s = search_example.copy()
+    s["parameters"] = [far_example, snr_example, pastro_example]
+    e["search"] = [s]
+    ps = pe_set_example.copy()
+    ps["parameters"] = [pe_mass1_example, pe_distance_example]
+    ps["links"] = [link_example]
+    e["pe_sets"] = [ps]
+    c = catalog_example.copy()
+    c["events"] = [e]
+    validate_schema(c)
+
+
+def test_data_url_optional():
+    "data_url key can be omited."
+    e = event_example.copy()
+    s = search_example.copy()
+    s["parameters"] = [far_example, snr_example, pastro_example]
+    e["search"] = [s]
+    ps = pe_set_example.copy()
+    ps["parameters"] = [pe_mass1_example, pe_distance_example]
+    ps["links"] = [link_example]
+    del ps["data_url"]
+    e["pe_sets"] = [ps]
+    c = catalog_example.copy()
+    c["events"] = [e]
+    validate_schema(c)
+
+
 def test_mass_unit():
     "Mass unit should be solar mass."
     with pytest.raises(ValueError):
@@ -272,3 +320,11 @@ def test_upper_lower_bound():
     p["is_upper_bound"] = p["is_lower_bound"] = True
     with pytest.raises(ValueError):
         ParameterValue(**p)
+
+
+def test_upper_lower_error_optional():
+    "Upper and lower errors are optional."
+    p = pe_mass1_example.copy()
+    p.pop("upper_error")
+    p.pop("lower_error")
+    ParameterValue(**p)
