@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools >= 61"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -19,11 +19,31 @@ dependencies = [
   "numpy",
   "pandas",
 ]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Intended Audience :: Science/Research",
+  "Natural Language :: English",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Scientific/Engineering :: Astronomy",
+  "Topic :: Scientific/Engineering :: Physics",
+  "License :: OSI Approved :: MIT License",
+]
 
 [project.urls]
 homepage = "https://github.com/gwosc-tutorial/gwosc-catalog"
 documentation = "https://github.com/gwosc-tutorial/gwosc-catalog"
 repository = "https://github.com/gwosc-tutorial/gwosc-catalog"
+
+[project.optional-dependencies]
+test = ["flake8", "pytest >= 2.7.0", "deepdiff"]
+docs = ["mkdocs-material-igwn"]
 
 [tool.setuptools]
 packages = ["gwosc_catalog"]
