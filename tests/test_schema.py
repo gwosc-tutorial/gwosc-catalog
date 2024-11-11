@@ -1,8 +1,8 @@
-from ccverify import validate_schema
+from ccverify import validate_schema, __version__ as schema_version
 from deepdiff.diff import DeepDiff
 
 example_catalog = {
-    "schema_version": "1.0",
+    "schema_version": schema_version,
     "catalog_name": "string",
     "catalog_description": "string",
     "doi": "https://doi.org/12345/",

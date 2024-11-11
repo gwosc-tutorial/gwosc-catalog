@@ -4,6 +4,7 @@ a format compatible with the Gravitational Wave Open Science Center.
 """
 
 import dataclasses
+import warnings
 import logging
 import json
 import re
@@ -350,6 +351,12 @@ class Catalog:
         _, m, d = self.release_date.split("-")
         if int(m) not in range(1, 13) or int(d) not in range(1, 32):
             raise ValueError("Catalog release_date error.")
+        if self.schema_version != __version__:
+            warnings.warn(
+                f"Schema version provided {self.schema_version} is different from current: {__version__}",
+                UserWarning,
+                stacklevel=1,
+            )
 
     def to_json(self, filename):
         """Write catalog to JSON file."""
