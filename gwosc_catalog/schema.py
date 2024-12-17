@@ -264,11 +264,11 @@ class Event:
         released for this event.
         This parameter is not necessary for groups outside the LVK.
 
-    search: ``SearchResult``
-        A ``SearchResult`` object.
+    search: list of SearchResult
+        A list of ``SearchResult`` objects.
 
-    pe_sets: ``ParameterSet``
-        A ``ParameterSet`` object.
+    pe_sets: list of ParameterSet
+        A list of ``ParameterSet`` objects.
     """
 
     event_name: str
