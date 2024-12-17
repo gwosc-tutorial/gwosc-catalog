@@ -390,7 +390,7 @@ def _condition_value_and_error(value, error) -> dict:
 
     if min_error == 0:
         return {
-            "median": float(f"{value:.2g}"),
+            "best": float(f"{value:.2g}"),
             "lower_error": float(f"{-error[0]:.2g}"),
             "upper_error": float(f"{error[1]:.2g}"),
             "decimal_places": max(0, _first_decimal_place(value) + 1),
