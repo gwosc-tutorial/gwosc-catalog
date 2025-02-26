@@ -2,7 +2,12 @@
 
 ## Example
 
-An example of the schema can be found below and the description of the keys after the example.
+!!! note
+
+    An example of the schema can be found below and the description of the keys after the example.
+    For a full real-life example, you can refer to the `ias-o3a.json` file
+    in the [IAS O3a catalog release page](https://zenodo.org/records/14853304).
+
 
 ```json
 {
