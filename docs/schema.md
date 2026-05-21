@@ -59,9 +59,9 @@
           "parameters": [
             {
               "parameter_name": "mass_1_source",
-              "median": 3.34,
-              "upper_95": 0.01,
-              "lower_05": 0.01,
+              "best": 3.34,
+              "upper_error": 0.01,
+              "lower_error": 0.01,
               "is_upper_bound": false,
               "is_lower_bound": false,
               "decimal_places": 2,
@@ -69,9 +69,9 @@
             },
             {
               "parameter_name": "luminosity_distance",
-              "median": 130,
-              "upper_95": 5,
-              "lower_05": 2,
+              "best": 130,
+              "upper_error": 5,
+              "lower_error": 2,
               "is_upper_bound": false,
               "is_lower_bound": false,
               "decimal_places": 0,
@@ -177,7 +177,7 @@ Keys marked "optional" are not required to be inlcuded; other keys are required.
     - `is_upper_bound`: (bool; optional) `true` if this value is an upper bound, `false` otherwise. Defaults to `false` if omitted.  Setting this to `true` diplays a less-than sign before the value.
     - `is_lower_bound`: (bool; optional) `true` if this value is an upper bound, `false` otherwise. Defaults to `false` if omitted.  Setting this to `true` displays a greater-than sign before the value.
     - `decimal_places`: (int) Number of decimal places of the best value to display, must be >= 0.  Displayed values will be rounded to this number of decimal places.
-    - `unit`: The physical unit of the `median` value. See below for allowed values.
+    - `unit`: The physical unit of the `best` value. See below for allowed values.
     - `links`: (object; optional) Links to any additional documentation or files that are helpful for the user.
 
 6. Links level (optional)
